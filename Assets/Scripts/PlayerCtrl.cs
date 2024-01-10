@@ -65,17 +65,17 @@ public class PlayerCtrl : MonoBehaviour
     }
     private void Update()
     {
-        //leftctrl 입력이 있고 손에 물건이 있으면 던지기
+        //leftctrl 입력이 있고 손에 음식이 있으면 던지기
         if (Input.GetKeyDown(KeyCode.LeftControl) && _pickupTransform.childCount > 0)
             Throw();
 
         //Space 입력 -> 집기/놓기
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            //빈 손
+            //빈 손 -> 감지된 음식 > 감지된 테이블 위 음식
             if (_pickupTransform.childCount <= 0)
             {
-                //인식된 물건 집기
+                //감지된 음식 집기
                 if (_detectedFoodTransform != null)
                 {
                     _detectedFoodTransform.position = _pickupTransform.position;
@@ -91,7 +91,7 @@ public class PlayerCtrl : MonoBehaviour
             else
             {
                 Transform foodTransform = _pickupTransform.GetChild(0);
-                //인식된 테이블이 있을 경우
+                //감지된 테이블이 있을 경우
                 if (_detectedTableTransform != null && _detectedTableTransform.childCount <= 0)
                 {
                     //테이블에 놓기
@@ -102,7 +102,7 @@ public class PlayerCtrl : MonoBehaviour
                 //인식된 테이블이 없을 경우
                 else
                 {
-                    //앞에 내려놓기
+                    //내려놓기
                     Rigidbody foodRigidbody = foodTransform.GetComponent<Rigidbody>();
                     foodRigidbody.useGravity = true;
                     foodRigidbody.isKinematic = false;
