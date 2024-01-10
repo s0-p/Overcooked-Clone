@@ -82,7 +82,6 @@ public class PlayerCtrl : MonoBehaviour
                     _detectedFoodTransform.parent = _pickupTransform;
 
                     Rigidbody foodRigidbody = _detectedFoodTransform.GetComponent<Rigidbody>();
-                    foodRigidbody.velocity = Vector3.zero;
                     foodRigidbody.useGravity = false;
                     foodRigidbody.isKinematic = true;
                 }
