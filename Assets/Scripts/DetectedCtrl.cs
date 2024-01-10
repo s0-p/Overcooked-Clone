@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Table : MonoBehaviour
+public class DetectedCtrl : MonoBehaviour
 {
     Renderer _renderer;
     //-----------------------------

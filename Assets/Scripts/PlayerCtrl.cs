@@ -13,12 +13,10 @@ public class PlayerCtrl : MonoBehaviour
     //-----------------------------------
     [SerializeField]
     Transform _pickupTransform;
-    Transform _detectedTableTransfom;
+    Transform _detectedTableTransform;
+    Transform _detectedFoodTransform;
     //-----------------------------------
-    void FixedUpdate()
-    {
-        Move();
-    }
+    void FixedUpdate() { Move(); }
     void Move()
     {
         _moveDir.x = Input.GetAxis("Horizontal");
@@ -30,27 +28,40 @@ public class PlayerCtrl : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_moveDir), Time.deltaTime * _rotSpeed);
         }
     }
+    //-----------------------------------
     void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Table"))
         {
-            if (_detectedTableTransfom != null)
-                _detectedTableTransfom.GetComponent<Table>().Exit();
+            if (_detectedTableTransform != null)
+                Exit(ref _detectedTableTransform);
 
-            _detectedTableTransfom = other.transform;
-            _detectedTableTransfom.GetComponent<Table>().Enter();
+            Detected(ref _detectedTableTransform, other.transform);
+        }
+        else if (other.CompareTag("Food"))
+        {
+            if (_detectedFoodTransform != null)
+                Exit(ref _detectedFoodTransform);
+
+            Detected(ref _detectedFoodTransform, other.transform);
         }
     }
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Table"))
-        {
-            if (_detectedTableTransfom != null)
-            {
-                _detectedTableTransfom.GetComponent<Table>().Exit();
-                _detectedTableTransfom = null;
-            }
-        }
+        if (_detectedTableTransform != null && other.CompareTag("Table"))
+            Exit(ref _detectedTableTransform);
+        else if (_detectedFoodTransform != null && other.CompareTag("Food"))
+            Exit(ref _detectedFoodTransform);
+    }
+    void Detected(ref Transform originTransform, Transform newTransform)
+    {
+        originTransform = newTransform;
+        originTransform.GetComponent<DetectedCtrl>().Enter();
+    }
+    void Exit(ref Transform originTransform)
+    {
+        originTransform.GetComponent<DetectedCtrl>().Exit();
+        originTransform = null;
     }
     private void Update()
     {
@@ -58,40 +69,45 @@ public class PlayerCtrl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl) && _pickupTransform.childCount > 0)
             Throw();
 
-        //Space 입력
+        //Space 입력 -> 집기/놓기
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            //테이블을 인식했을 경우
-            if (_detectedTableTransfom != null)
+            //빈 손
+            if (_pickupTransform.childCount <= 0)
             {
-                //손에 물건이 있고 테이블이 비어 있으면 물건 놓기
-                if (_pickupTransform.childCount > 0)
+                //인식된 물건 집기
+                if (_detectedFoodTransform != null)
                 {
-                    Transform foodTransform = _pickupTransform.GetChild(0);
-                    if (foodTransform != null)
-                    {
-                        foodTransform.parent = _detectedTableTransfom;
-                        foodTransform.position = _detectedTableTransfom.position + Vector3.up;
-                    }
-                    else
-                    {
-                        foodTransform = _detectedTableTransfom.GetChild(0);
-                        if (foodTransform != null)
-                        {
-                            foodTransform.parent = _pickupTransform;
-                            foodTransform.position = _pickupTransform.position;
-                        }
-                    }
+                    _detectedFoodTransform.position = _pickupTransform.position;
+                    _detectedFoodTransform.parent = _pickupTransform;
+
+                    Rigidbody foodRigidbody = _detectedFoodTransform.GetComponent<Rigidbody>();
+                    foodRigidbody.velocity = Vector3.zero;
+                    foodRigidbody.useGravity = false;
+                    foodRigidbody.isKinematic = true;
                 }
-                //테이블에 물건이 있고 손이 비어있으면 물건 들기
+            }
+            //빈 손X
+            else
+            {
+                Transform foodTransform = _pickupTransform.GetChild(0);
+                //인식된 테이블이 있을 경우
+                if (_detectedTableTransform != null && _detectedTableTransform.childCount <= 0)
+                {
+                    //테이블에 놓기
+                    foodTransform.parent = _detectedTableTransform;
+                    foodTransform.position = _detectedTableTransform.position + Vector3.up;
+                }
+
+                //인식된 테이블이 없을 경우
                 else
                 {
-                    if (_pickupTransform.childCount <= 0)
-                    {
-                        Transform itemTransform = _detectedTableTransfom.GetChild(0);
-                        itemTransform.position = _pickupTransform.position;
-                        itemTransform.parent = _pickupTransform;
-                    }
+                    //앞에 내려놓기
+                    Rigidbody foodRigidbody = foodTransform.GetComponent<Rigidbody>();
+                    foodRigidbody.useGravity = true;
+                    foodRigidbody.isKinematic = false;
+
+                    foodTransform.parent = null;
                 }
             }
         }
