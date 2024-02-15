@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class DetectedCtrl : MonoBehaviour
 {
-    Renderer _renderer;
+    protected Renderer _renderer;
     //-----------------------------
     [SerializeField]
-    Shader _detectedShader;
-    Shader _originShader;
+    protected Shader _detectedShader;
+    protected Shader _originShader;
     //-----------------------------
-    void Awake()
+    protected virtual void Awake()
     {
         _renderer = GetComponent<Renderer>();
         _originShader = _renderer.material.shader;
