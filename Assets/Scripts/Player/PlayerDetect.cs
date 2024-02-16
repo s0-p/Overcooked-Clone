@@ -13,10 +13,12 @@ public class PlayerDetect : MonoBehaviour
     //-----------------------------------
     Transform _detectedFood;
     //-----------------------------------
+    PlayerMove _playerMove;
     PlayerAnimation _playerAnimation;
     //-----------------------------------
     void Awake()
     {
+        _playerMove = GetComponent<PlayerMove>();
         _playerAnimation = GetComponent<PlayerAnimation>();
     }
     //-----------------------------------
@@ -91,6 +93,7 @@ public class PlayerDetect : MonoBehaviour
                 //  감지된 오브젝트 집기
                 if (_detectedFood != null)
                 {
+                    _playerMove.enabled = false;
                     _playerAnimation.PickUpAni();
                 }
 
@@ -99,6 +102,7 @@ public class PlayerDetect : MonoBehaviour
                         _detectedTable.InObject != null)
                 {
                     _detectedTable.InObject = null;
+                    _playerMove.enabled = false;
                     _playerAnimation.PickUpAni();
                 }
             }
@@ -127,6 +131,7 @@ public class PlayerDetect : MonoBehaviour
         foodRigidbody.isKinematic = true;
 
         _detectedFood.GetComponent<Collider>().isTrigger = true;
+        _playerMove.enabled = true;
     }
     public void PutDown()
     {
