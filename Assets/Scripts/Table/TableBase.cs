@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class TableBase : MonoBehaviour
 {
-    public Transform InObject { get; set; }
+    public Transform OnObject { get; set; }
+    //---------------------------------------------
     void Awake()
     {
-        InObject = null;
+        OnObject = null;
     }
+    //---------------------------------------------
     public void PutOnObject(Transform objectTransform)
     {
-        InObject = objectTransform;
-        InObject.parent = transform;
-        InObject.position = transform.position + Vector3.up;
-    }
-    public virtual void Operate() { }
+        OnObject = objectTransform;
+        OnObject.parent = transform;
+        OnObject.position = transform.position + Vector3.up;
 
+        OnObject.GetComponent<Rigidbody>().isKinematic = true;
+    }
+    //---------------------------------------------
+    public virtual void Operate() { }
 }
 

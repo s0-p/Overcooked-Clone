@@ -85,7 +85,7 @@ public class PlayerAction : MonoBehaviour
                 Throw();
 
             //  빈손 && 감지된 테이블이 있으면 테이블 기능 실행
-            else if(_detectedTable != null)
+            else if (_detectedTable != null)
                 _detectedTable.Operate();
         }
 
@@ -106,16 +106,16 @@ public class PlayerAction : MonoBehaviour
 
                 //테이블 위 오브젝트를 가져올 경우
                 else if (_detectedTable != null &&
-                        _detectedTable.InObject != null)
+                        _detectedTable.OnObject != null)
                 {
-                    _detectedTable.InObject = null;
+                    _detectedTable.OnObject = null;
                     _playerMove.enabled = false;
                     _playerAnimation.PickUpAni();
                 }
             }
-            //  빈 손X
+            //  빈 손X -> 놓기
             else
-                _playerAnimation.PutDownAni();
+                PutDown();
         }
     }
     //-----------------------------------
@@ -124,46 +124,35 @@ public class PlayerAction : MonoBehaviour
     {
         _detectedFood.position = _pickupTransform.position;
         _detectedFood.parent = _pickupTransform;
+        _detectedFood.GetComponent<Collider>().enabled = false;
 
         Rigidbody foodRigidbody = _detectedFood.GetComponent<Rigidbody>();
         foodRigidbody.useGravity = false;
         foodRigidbody.isKinematic = true;
 
-        _detectedFood.GetComponent<Collider>().isTrigger = true;
         _playerMove.enabled = true;
     }
     public void PutDown()
     {
+        _playerAnimation.PutDownAni();
+
         Transform foodTransform = _pickupTransform.GetChild(0);
-        //감지된 테이블이 있고 놓인 오브젝트가 없을경우
-        if (_detectedTable != null && _detectedTable.InObject == null)
-        {
-            //테이블 위에 놓기
-            _detectedTable.PutOnObject(foodTransform);
-        }
+        foodTransform.parent = null;
 
-        /*  problem
-            음식을 던져서 안착되는 경우가 있으니
-            그냥 떨어뜨렸는데 테이블이 인식해서
-            그 위에 놓아지는걸로 수정 필요
-        */
+        Rigidbody foodRigidbody = foodTransform.GetComponent<Rigidbody>();
+        foodRigidbody.useGravity = true;
+        foodRigidbody.isKinematic = false;
 
-        //인식된 테이블이 없을 경우
-        else
-        {
-            //내려놓기
-            Rigidbody foodRigidbody = foodTransform.GetComponent<Rigidbody>();
-            foodRigidbody.useGravity = true;
-            foodRigidbody.isKinematic = false;
-
-            foodTransform.parent = null;
-        }
-            foodTransform.GetComponent<Collider>().isTrigger = false;
+        foodTransform.GetComponent<Collider>().enabled = true;
     }
     //-----------------------------------
     //  물건 던지기
     void Throw()
     {
+        _playerAnimation.PutDownAni();
+        
+        _pickupTransform.GetComponentInChildren<Collider>().enabled = true;
+
         Rigidbody itemRigidbody = _pickupTransform.GetComponentInChildren<Rigidbody>();
         itemRigidbody.useGravity = true;
         itemRigidbody.isKinematic = false;

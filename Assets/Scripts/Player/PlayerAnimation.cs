@@ -14,7 +14,7 @@ public class PlayerAnimation : MonoBehaviour
     }
     public void PutDownAni() 
     {
-        _animator.SetTrigger("PutDown"); 
         _animator.SetBool("PickUp", false);
+        _animator.SetTrigger("PutDown"); 
     }
 }
