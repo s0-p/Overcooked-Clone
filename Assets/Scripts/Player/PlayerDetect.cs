@@ -77,10 +77,17 @@ public class PlayerDetect : MonoBehaviour
     //-----------------------------------
     void Update()
     {
-        //Leftctrl 입력이 있고 손에 오브젝트가 있으면 던지기
-        if (Input.GetKeyDown(KeyCode.LeftControl) &&
-            _pickupTransform.childCount > 0)
-            Throw();
+        //  Leftctrl 입력 
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            //  손에 오브젝트가 있으면 던지기
+            if (_pickupTransform.childCount > 0)
+                Throw();
+
+            //  빈손 && 감지된 테이블이 있으면 테이블 기능 실행
+            else if(_detectedTable != null)
+                _detectedTable.Operate();
+        }
 
         //Space 입력 -> 집기/놓기
         else if (Input.GetKeyDown(KeyCode.Space))
@@ -110,14 +117,6 @@ public class PlayerDetect : MonoBehaviour
             else
                 _playerAnimation.PutDownAni();
         }
-
-        /*
-        //problem
-        // Space를 누르고 있으면   -> LeftCtrl로 변경
-        else if (Input.GetKey(KeyCode.Space) && _detectedTable != null)
-            // 테이블 기능 실행
-            _detectedTable.Operate();
-        //*/
     }
     //-----------------------------------
     //  물건 집기
