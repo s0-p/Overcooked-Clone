@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDetect : MonoBehaviour
+public class PlayerAction : MonoBehaviour
 {
     [SerializeField]
     float _throwPower = 30;
