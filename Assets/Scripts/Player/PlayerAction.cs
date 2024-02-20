@@ -43,8 +43,8 @@ public class PlayerAction : MonoBehaviour
     {
         if (_detectedTable == null)
         {
-            _detectedTable = other.GetComponent<TableBase>();
-            _detectedTable.GetComponent<DetectedCtrl>().Enter();
+            _detectedTable = other.GetComponentInParent<TableBase>();
+            _detectedTable.GetComponentInChildren<DetectedCtrl>().Enter();
         }
     }
     void DetectFood(Collider other)
@@ -61,7 +61,7 @@ public class PlayerAction : MonoBehaviour
         {
             if (_detectedTable != null)
             {
-                _detectedTable.GetComponent<DetectedCtrl>().Exit();
+                _detectedTable.GetComponentInChildren<DetectedCtrl>().Exit();
                 _detectedTable = null;
             }
         }
@@ -92,23 +92,18 @@ public class PlayerAction : MonoBehaviour
         //Space 입력 -> 집기/놓기
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            //  빈 손
+            //  빈 손 -> 집기
             if (_pickupTransform.childCount <= 0)
             {
-                //  감지된 오브젝트 > 감지된 테이블 위 오브젝트
-
-                //  감지된 오브젝트 집기
                 if (_detectedFood != null)
                 {
-                    _playerMove.enabled = false;
-                    _playerAnimation.PickUpAni();
-                }
+                    Rigidbody foodRigidbody = _detectedFood.GetComponent<Rigidbody>();
+                    foodRigidbody.isKinematic = true;
+                    
+                    //테이블 위 오브젝트를 가져올 경우
+                    if (_detectedTable != null && _detectedTable.OnObject != null)
+                        _detectedTable.OnObject = null;
 
-                //테이블 위 오브젝트를 가져올 경우
-                else if (_detectedTable != null &&
-                        _detectedTable.OnObject != null)
-                {
-                    _detectedTable.OnObject = null;
                     _playerMove.enabled = false;
                     _playerAnimation.PickUpAni();
                 }
@@ -124,11 +119,8 @@ public class PlayerAction : MonoBehaviour
     {
         _detectedFood.position = _pickupTransform.position;
         _detectedFood.parent = _pickupTransform;
-        _detectedFood.GetComponent<Collider>().enabled = false;
 
-        Rigidbody foodRigidbody = _detectedFood.GetComponent<Rigidbody>();
-        foodRigidbody.useGravity = false;
-        foodRigidbody.isKinematic = true;
+        _detectedFood.GetComponent<Collider>().enabled = false;
 
         _playerMove.enabled = true;
     }
@@ -140,7 +132,6 @@ public class PlayerAction : MonoBehaviour
         foodTransform.parent = null;
 
         Rigidbody foodRigidbody = foodTransform.GetComponent<Rigidbody>();
-        foodRigidbody.useGravity = true;
         foodRigidbody.isKinematic = false;
 
         foodTransform.GetComponent<Collider>().enabled = true;
@@ -154,7 +145,6 @@ public class PlayerAction : MonoBehaviour
         _pickupTransform.GetComponentInChildren<Collider>().enabled = true;
 
         Rigidbody itemRigidbody = _pickupTransform.GetComponentInChildren<Rigidbody>();
-        itemRigidbody.useGravity = true;
         itemRigidbody.isKinematic = false;
         itemRigidbody.transform.parent = null;
         itemRigidbody.AddForce(transform.forward * _throwPower);

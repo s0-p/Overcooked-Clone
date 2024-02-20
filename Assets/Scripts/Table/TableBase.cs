@@ -13,11 +13,14 @@ public class TableBase : MonoBehaviour
     //---------------------------------------------
     public void PutOnObject(Transform objectTransform)
     {
-        OnObject = objectTransform;
-        OnObject.parent = transform;
-        OnObject.position = transform.position + Vector3.up;
+        if (OnObject == null)
+        {
+            OnObject = objectTransform;
+            OnObject.parent = transform;
+            OnObject.position = transform.position + Vector3.up;
 
-        OnObject.GetComponent<Rigidbody>().isKinematic = true;
+            OnObject.GetComponent<Rigidbody>().isKinematic = true;
+        }
     }
     //---------------------------------------------
     public virtual void Operate() { }
