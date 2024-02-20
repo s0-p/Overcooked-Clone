@@ -14,7 +14,7 @@ public class TableBase : MonoBehaviour
         {
             OnObject = objectTransform;
             OnObject.parent = transform;
-            OnObject.position = transform.position + Vector3.up;
+            OnObject.position = transform.position + Vector3.up * 0.7f;
 
             OnObject.GetComponent<Rigidbody>().isKinematic = true;
         }
