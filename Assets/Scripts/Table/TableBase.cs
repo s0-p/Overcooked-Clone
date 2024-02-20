@@ -6,12 +6,9 @@ public class TableBase : MonoBehaviour
 {
     public Transform OnObject { get; set; }
     //---------------------------------------------
-    void Awake()
-    {
-        OnObject = null;
-    }
+    protected virtual void Awake() { OnObject = null; }
     //---------------------------------------------
-    public void PutOnObject(Transform objectTransform)
+    public virtual void PutOnObject(Transform objectTransform)
     {
         if (OnObject == null)
         {
@@ -24,5 +21,6 @@ public class TableBase : MonoBehaviour
     }
     //---------------------------------------------
     public virtual void Operate() { }
+    public virtual void Operate(GameObject player) { }
 }
 

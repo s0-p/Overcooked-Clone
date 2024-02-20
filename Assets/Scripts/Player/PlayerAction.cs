@@ -80,13 +80,15 @@ public class PlayerAction : MonoBehaviour
         //  Leftctrl 입력 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            //  손에 오브젝트가 있으면 던지기
+            //  빈 손 x -> 던지기
             if (_pickupTransform.childCount > 0)
                 Throw();
 
-            //  빈손 && 감지된 테이블이 있으면 테이블 기능 실행
+            //  빈 손 && 감지된 테이블이 있으면 테이블 기능 실행
             else if (_detectedTable != null)
-                _detectedTable.Operate();
+            {
+                _detectedTable.Operate(gameObject);
+            }
         }
 
         //Space 입력 -> 집기/놓기
@@ -97,8 +99,7 @@ public class PlayerAction : MonoBehaviour
             {
                 if (_detectedFood != null)
                 {
-                    Rigidbody foodRigidbody = _detectedFood.GetComponent<Rigidbody>();
-                    foodRigidbody.isKinematic = true;
+                    _detectedFood.GetComponent<Rigidbody>().isKinematic = true;
                     
                     //테이블 위 오브젝트를 가져올 경우
                     if (_detectedTable != null && _detectedTable.OnObject != null)
