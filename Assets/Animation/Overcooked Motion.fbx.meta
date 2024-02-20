@@ -15,7 +15,7 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
-    motionNodeName: 
+    motionNodeName: Armature
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
@@ -159,7 +159,7 @@ ModelImporter:
       name: "Armature|\uCE7C\uC9C8"
       takeName: "Armature|\uCE7C\uC9C8"
       internalID: 7036034188880250481
-      firstFrame: 0
+      firstFrame: 13
       lastFrame: 54
       wrapMode: 0
       orientationOffsetY: 0
@@ -167,8 +167,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
