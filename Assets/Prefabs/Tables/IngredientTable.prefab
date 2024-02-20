@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 1964709115339747533}
   - component: {fileID: 6130199702912252913}
   m_Layer: 0
-  m_Name: Ingredient Table
+  m_Name: IngredientTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
