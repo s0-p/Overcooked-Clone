@@ -17,6 +17,7 @@ public class IngredientTable : TableBase
                         Quaternion.identity);
 
             ingredient.GetComponent<Rigidbody>().isKinematic = true;
+
             player.GetComponent<PlayerMove>().enabled = false;
             player.GetComponent<PlayerAnimation>().PickUpAni();
         }

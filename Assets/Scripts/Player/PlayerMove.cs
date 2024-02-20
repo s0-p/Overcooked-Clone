@@ -43,4 +43,6 @@ public class PlayerMove : MonoBehaviour
             // 빠른 이동
             _rigidbody.AddForce(transform.forward * _fastMove, ForceMode.Impulse);
     }
+    //-----------------------------------
+    public void LookAtTable(Transform table) { transform.LookAt(table.position); }
 }

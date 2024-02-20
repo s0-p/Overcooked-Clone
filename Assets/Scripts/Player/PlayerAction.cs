@@ -87,6 +87,7 @@ public class PlayerAction : MonoBehaviour
             //  빈 손 && 감지된 테이블이 있으면 테이블 기능 실행
             else if (_detectedTable != null)
             {
+                _playerMove.LookAtTable(_detectedTable.transform);
                 _detectedTable.Operate(gameObject);
             }
         }
