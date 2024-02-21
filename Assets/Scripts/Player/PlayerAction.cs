@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,15 +10,20 @@ public class PlayerAction : MonoBehaviour
     //-----------------------------------
     [Space, SerializeField]
     Transform _pickupTransform;
-    TableBase _detectedTable;
-    //-----------------------------------
     Transform _detectedFood;
+    //-----------------------------------
+    BaseTable _detectedTable;
+    //-----------------------------------
+    [SerializeField]
+    GameObject _knife;
     //-----------------------------------
     PlayerMove _playerMove;
     PlayerAnimation _playerAnimation;
     //-----------------------------------
     void Awake()
     {
+        _knife.SetActive(false);
+
         _playerMove = GetComponent<PlayerMove>();
         _playerAnimation = GetComponent<PlayerAnimation>();
     }
@@ -28,7 +34,7 @@ public class PlayerAction : MonoBehaviour
         if (other.CompareTag("Table"))
             DetectTable(other);
 
-        if (other.CompareTag("Food"))
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Food"))
             DetectFood(other);
     }
     void OnTriggerStay(Collider other)
@@ -36,14 +42,14 @@ public class PlayerAction : MonoBehaviour
         if (other.CompareTag("Table"))
             DetectTable(other);
 
-        if (other.CompareTag("Food"))
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Food"))
             DetectFood(other);
     }
     void DetectTable(Collider other)
     {
         if (_detectedTable == null)
         {
-            _detectedTable = other.GetComponentInParent<TableBase>();
+            _detectedTable = other.GetComponentInParent<BaseTable>();
             _detectedTable.GetComponentInChildren<DetectedCtrl>().Enter();
         }
     }
@@ -52,7 +58,18 @@ public class PlayerAction : MonoBehaviour
         if (_detectedFood == null)
         {
             _detectedFood = other.transform;
-            _detectedFood.GetComponent<DetectedCtrl>().Enter();
+            if(_detectedFood.parent != null)
+                _detectedFood = _detectedFood.parent;
+
+            for (int index = 0; index < _detectedFood.childCount; index++)
+            {
+                GameObject food = _detectedFood.GetChild(index).gameObject;
+                if (food.activeSelf)
+                {
+                    food.GetComponent<DetectedCtrl>().Enter();
+                    break;
+                }
+            }
         }
     }
     void OnTriggerExit(Collider other)
@@ -65,13 +82,20 @@ public class PlayerAction : MonoBehaviour
                 _detectedTable = null;
             }
         }
-        if (other.CompareTag("Food"))
+
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Food"))
         {
-            if (_detectedFood != null)
+            if (_pickupTransform.childCount > 0)
             {
-                _detectedFood.GetComponent<DetectedCtrl>().Exit();
-                _detectedFood = null;
+                Transform otherTransform = other.transform;
+                if (otherTransform.parent != null)
+                    otherTransform = otherTransform.parent;
+
+                if (otherTransform == _pickupTransform.GetChild(0))
+                    return;
             }
+            other.GetComponent<DetectedCtrl>().Exit();
+            _detectedFood = null;
         }
     }
     //-----------------------------------
@@ -121,8 +145,16 @@ public class PlayerAction : MonoBehaviour
     {
         _detectedFood.position = _pickupTransform.position;
         _detectedFood.parent = _pickupTransform;
-
-        _detectedFood.GetComponent<Collider>().enabled = false;
+        
+        for (int index = 0; index < _detectedFood.childCount; index++)
+        {
+            GameObject food = _detectedFood.GetChild(index).gameObject;
+            if (food.activeSelf)
+            {
+                food.GetComponent<Collider>().enabled = false;
+                break;
+            }
+        }
 
         _playerMove.enabled = true;
     }
@@ -136,7 +168,16 @@ public class PlayerAction : MonoBehaviour
         Rigidbody foodRigidbody = foodTransform.GetComponent<Rigidbody>();
         foodRigidbody.isKinematic = false;
 
-        foodTransform.GetComponent<Collider>().enabled = true;
+
+        for (int index = 0; index < _detectedFood.childCount; index++)
+        {
+            GameObject food = _detectedFood.GetChild(index).gameObject;
+            if (food.activeSelf)
+            {
+                food.GetComponent<Collider>().enabled = true;
+                break;
+            }
+        }
     }
     //-----------------------------------
     //  물건 던지기
@@ -144,11 +185,27 @@ public class PlayerAction : MonoBehaviour
     {
         _playerAnimation.PutDownAni();
         
-        _pickupTransform.GetComponentInChildren<Collider>().enabled = true;
-
+        for (int index = 0; index < _pickupTransform.GetChild(0).childCount; index++)
+        {
+            GameObject food = _detectedFood.GetChild(index).gameObject;
+            if (food.activeSelf)
+            {
+                food.GetComponent<Collider>().enabled = true;
+                break;
+            }
+        }
         Rigidbody itemRigidbody = _pickupTransform.GetComponentInChildren<Rigidbody>();
         itemRigidbody.isKinematic = false;
         itemRigidbody.transform.parent = null;
         itemRigidbody.AddForce(transform.forward * _throwPower);
+
+
+    }
+    //-----------------------------------
+    // 칼 온오프
+    public void PauseCutting(bool isOn) 
+    { 
+        _knife.SetActive(isOn);
+        _detectedFood = null;
     }
 }

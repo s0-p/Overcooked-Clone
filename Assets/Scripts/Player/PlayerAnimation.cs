@@ -5,10 +5,15 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     Animator _animator;
-    void Awake() {  _animator = GetComponentInChildren<Animator>(); }
+    PlayerAction _playerAction;
+    void Awake() 
+    {  
+        _animator = GetComponent<Animator>(); 
+        _playerAction = GetComponent<PlayerAction>();
+    }
     public void MoveAni(bool isOn) 
     {
-        if (isOn) CutAni(false);
+        if (isOn) CuttingAni(false);
 
         _animator.SetBool("Move", isOn); 
     }
@@ -22,5 +27,9 @@ public class PlayerAnimation : MonoBehaviour
         _animator.SetBool("PickUp", false);
         _animator.SetTrigger("PutDown"); 
     }
-    public void CutAni(bool isOn) { _animator.SetBool("Cut", isOn); }
+    public void CuttingAni(bool isOn) 
+    {
+        _playerAction.PauseCutting(isOn);
+        _animator.SetBool("Cut", isOn); 
+    }
 }

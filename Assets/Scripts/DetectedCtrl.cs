@@ -8,11 +8,12 @@ public class DetectedCtrl : MonoBehaviour
     protected Shader _detectedShader;
     protected Shader _originShader;
     //-----------------------------
-    protected virtual void Awake()
+    void Awake()
     {
         _renderer = GetComponent<Renderer>();
         _originShader = _renderer.material.shader;
     }
+    void OnEnable() { Exit(); }
     //-----------------------------
     public void Enter() { _renderer.material.shader = _detectedShader; }
     public void Exit() { _renderer.material.shader = _originShader; }
