@@ -85,22 +85,21 @@ public class PlayerAction : MonoBehaviour
 
         else if (other.gameObject.layer == LayerMask.NameToLayer("Food"))
         {
-            if (_pickupTransform.childCount > 0)
+            if (_pickupTransform.childCount <= 0)
             {
-                Transform otherTransform = other.transform;
-                if (otherTransform.parent != null)
-                    otherTransform = otherTransform.parent;
-
-                if (otherTransform == _pickupTransform.GetChild(0))
-                    return;
+                other.GetComponent<DetectedCtrl>().Exit();
+                _detectedFood = null;
             }
-            other.GetComponent<DetectedCtrl>().Exit();
-            _detectedFood = null;
         }
     }
     //-----------------------------------
     void Update()
     {
+        if (_detectedFood != null)
+            Debug.Log(_detectedFood.name);
+        else
+            Debug.Log("null");
+
         //  Leftctrl 입력 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
@@ -155,7 +154,6 @@ public class PlayerAction : MonoBehaviour
                 break;
             }
         }
-
         _playerMove.enabled = true;
     }
     public void PutDown()
@@ -198,14 +196,13 @@ public class PlayerAction : MonoBehaviour
         itemRigidbody.isKinematic = false;
         itemRigidbody.transform.parent = null;
         itemRigidbody.AddForce(transform.forward * _throwPower);
-
-
     }
     //-----------------------------------
-    // 칼 온오프
+    // 컷팅 온오프
     public void PauseCutting(bool isOn) 
     { 
         _knife.SetActive(isOn);
-        _detectedFood = null;
+        if(!isOn)
+            _detectedFood = null;
     }
 }

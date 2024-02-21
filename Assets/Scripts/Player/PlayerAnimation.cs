@@ -13,7 +13,7 @@ public class PlayerAnimation : MonoBehaviour
     }
     public void MoveAni(bool isOn) 
     {
-        if (isOn) CuttingAni(false);
+        if (isOn && _animator.GetBool("Cut")) CuttingAni(false);
 
         _animator.SetBool("Move", isOn); 
     }
