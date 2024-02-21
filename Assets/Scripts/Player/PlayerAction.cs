@@ -95,11 +95,6 @@ public class PlayerAction : MonoBehaviour
     //-----------------------------------
     void Update()
     {
-        if (_detectedFood != null)
-            Debug.Log(_detectedFood.name);
-        else
-            Debug.Log("null");
-
         //  Leftctrl ют╥б 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {

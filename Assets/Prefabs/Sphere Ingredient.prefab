@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1452973548771857558}
   m_Layer: 0
   m_Name: Sphere Ingredient
-  m_TagString: Untagged
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -371,7 +371,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2948394054825338218}
   - component: {fileID: 1318545075108636718}
-  m_Layer: 0
+  - component: {fileID: 4630481397224117864}
+  m_Layer: 6
   m_Name: cooked
   m_TagString: Food
   m_Icon: {fileID: 0}
@@ -421,6 +422,19 @@ CapsuleCollider:
   m_Height: 0.86
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4630481397224117864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5992261019625724878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcee0d4006b73064186e698909880565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _detectedShader: {fileID: 4800000, guid: 99c639b8277904043a3e50de498a9097, type: 3}
 --- !u!1 &6341449935112491148
 GameObject:
   m_ObjectHideFlags: 0
