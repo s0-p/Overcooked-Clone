@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5548601712521248009}
   - component: {fileID: 2132664654992491424}
   - component: {fileID: 1452973548771857558}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere Ingredient
   m_TagString: Food
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 4036914969221673115}
   - component: {fileID: 4190503162330294420}
   - component: {fileID: 923529266095103760}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Sphere (1)
   m_TagString: Food
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 9028382015720882951}
   - component: {fileID: 5137105457187112463}
   - component: {fileID: 4232006678538698317}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Sphere (3)
   m_TagString: Food
   m_Icon: {fileID: 0}
@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 77409992768136014}
   - component: {fileID: 2524795201478308486}
   - component: {fileID: 4876403306874840336}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Sphere (4)
   m_TagString: Food
   m_Icon: {fileID: 0}
@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 4316550176578257392}
   - component: {fileID: 2417956302406753153}
   - component: {fileID: 4000368026857728455}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Sphere (2)
   m_TagString: Food
   m_Icon: {fileID: 0}
@@ -612,7 +612,7 @@ GameObject:
   - component: {fileID: 7585967998837862701}
   - component: {fileID: 332897186464804986}
   - component: {fileID: 7944913425860459286}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Sphere
   m_TagString: Food
   m_Icon: {fileID: 0}

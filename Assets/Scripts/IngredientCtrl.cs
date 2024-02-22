@@ -8,7 +8,7 @@ public class IngredientCtrl : MonoBehaviour
     GameObject _origin;
     [SerializeField]
     GameObject _cooked;
-    bool _isCooked = false;
+    public bool IsCooked { get; set; }
 
     void Awake()
     {
@@ -17,7 +17,7 @@ public class IngredientCtrl : MonoBehaviour
     }
     public void ChangeToCookedModel()
     {
-        _isCooked = true;
+        IsCooked = true;
         _cooked.SetActive(true);
         _origin.SetActive(false);
     }
