@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IngredientTable : BaseTable
+public class IngredientTable : BasicTable
 {
     [SerializeField]
     GameObject _ingredientPrefab;

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Table
   - Food
+  - Ingredient
   layers:
   - Default
   - TransparentFX

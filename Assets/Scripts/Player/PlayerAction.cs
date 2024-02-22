@@ -12,7 +12,7 @@ public class PlayerAction : MonoBehaviour
     Transform _pickupTransform;
     Transform _detectedFood;
     //-----------------------------------
-    BaseTable _detectedTable;
+    BasicTable _detectedTable;
     //-----------------------------------
     [SerializeField]
     GameObject _knife;
@@ -49,7 +49,7 @@ public class PlayerAction : MonoBehaviour
     {
         if (_detectedTable == null)
         {
-            _detectedTable = other.GetComponentInParent<BaseTable>();
+            _detectedTable = other.GetComponentInParent<BasicTable>();
             _detectedTable.GetComponentInChildren<DetectedCtrl>().Enter();
         }
     }

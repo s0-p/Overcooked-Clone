@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class TrashTable : BaseTable
+public class TrashTable : BasicTable
 {
     public override void PutOnObject(Transform objectTransform)
     {

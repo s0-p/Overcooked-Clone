@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Table_DetectFood : MonoBehaviour
 {
-    BaseTable _tableBase;
+    BasicTable _tableBase;
     void Awake()
     {
-        _tableBase = GetComponentInParent<BaseTable>();
+        _tableBase = GetComponentInParent<BasicTable>();
     }
     void OnTriggerEnter(Collider other)
     {

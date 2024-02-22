@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CuttingTable : BaseTable
+public class CuttingTable : BasicTable
 {
     Slider _slider;
     //------------------------------------------------------------

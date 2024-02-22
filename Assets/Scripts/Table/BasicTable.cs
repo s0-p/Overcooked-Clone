@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseTable : MonoBehaviour
+public class BasicTable : MonoBehaviour
 {
     public Transform OnObject { get; set; }
     //---------------------------------------------
