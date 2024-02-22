@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7653532595802650335}
   m_Layer: 0
   m_Name: Food Detection Collider
-  m_TagString: Untagged
+  m_TagString: Table
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 6352040171441802326}
   m_Layer: 0
   m_Name: IngredientTable
-  m_TagString: Untagged
+  m_TagString: Table
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -42,7 +42,8 @@ public class PlayerAction : MonoBehaviour
         if (other.CompareTag("Table"))
             DetectTable(other);
 
-        else if (other.gameObject.layer == LayerMask.NameToLayer("Food"))
+        else if (other.CompareTag("Plate") ||
+                other.gameObject.layer == LayerMask.NameToLayer("Food"))
             DetectFood(other);
     }
     void DetectTable(Collider other)
@@ -58,18 +59,10 @@ public class PlayerAction : MonoBehaviour
         if (_detectedFood == null)
         {
             _detectedFood = other.transform;
-            if(_detectedFood.parent != null)
+            if(_detectedFood.parent != null && !_detectedFood.parent.CompareTag("Table"))
                 _detectedFood = _detectedFood.parent;
 
-            for (int index = 0; index < _detectedFood.childCount; index++)
-            {
-                GameObject food = _detectedFood.GetChild(index).gameObject;
-                if (food.activeSelf)
-                {
-                    food.GetComponent<DetectedCtrl>().Enter();
-                    break;
-                }
-            }
+            _detectedFood.GetComponentInChildren<DetectedCtrl>().Enter();
         }
     }
     void OnTriggerExit(Collider other)
@@ -83,7 +76,8 @@ public class PlayerAction : MonoBehaviour
             }
         }
 
-        else if (other.gameObject.layer == LayerMask.NameToLayer("Food"))
+        else if (other.CompareTag("Plate") ||
+                other.gameObject.layer == LayerMask.NameToLayer("Food"))
         {
             if (_pickupTransform.childCount <= 0)
             {
@@ -139,16 +133,8 @@ public class PlayerAction : MonoBehaviour
     {
         _detectedFood.position = _pickupTransform.position;
         _detectedFood.parent = _pickupTransform;
-        
-        for (int index = 0; index < _detectedFood.childCount; index++)
-        {
-            GameObject food = _detectedFood.GetChild(index).gameObject;
-            if (food.activeSelf)
-            {
-                food.GetComponent<Collider>().enabled = false;
-                break;
-            }
-        }
+
+        _detectedFood.GetComponentInChildren<Collider>().enabled = false;
         _playerMove.enabled = true;
     }
     public void PutDown()
@@ -161,34 +147,19 @@ public class PlayerAction : MonoBehaviour
         Rigidbody foodRigidbody = foodTransform.GetComponent<Rigidbody>();
         foodRigidbody.isKinematic = false;
 
-
-        for (int index = 0; index < _detectedFood.childCount; index++)
-        {
-            GameObject food = _detectedFood.GetChild(index).gameObject;
-            if (food.activeSelf)
-            {
-                food.GetComponent<Collider>().enabled = true;
-                break;
-            }
-        }
+        _detectedFood.GetComponentInChildren<Collider>().enabled = true;
     }
     //-----------------------------------
     //  물건 던지기
     void Throw()
     {
         _playerAnimation.PutDownAni();
-        
-        for (int index = 0; index < _pickupTransform.GetChild(0).childCount; index++)
-        {
-            GameObject food = _detectedFood.GetChild(index).gameObject;
-            if (food.activeSelf)
-            {
-                food.GetComponent<Collider>().enabled = true;
-                break;
-            }
-        }
+
+        _detectedFood.GetComponentInChildren<Collider>().enabled = true;
+
         Rigidbody itemRigidbody = _pickupTransform.GetComponentInChildren<Rigidbody>();
         itemRigidbody.isKinematic = false;
+
         itemRigidbody.transform.parent = null;
         itemRigidbody.AddForce(transform.forward * _throwPower);
     }
