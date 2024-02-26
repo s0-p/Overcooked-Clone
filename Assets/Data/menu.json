@@ -1,0 +1,40 @@
+{
+   "items":[
+      {
+         "bitId":1,
+         "name":"Sashimi",
+         "ingredient1bitId":1,
+         "ingredient2bitId":0,
+         "ingredient3bitId":0,
+         "ingredient4bitId":0,
+         "ingredientsBit":1
+      },
+      {
+         "bitId":2,
+         "name":"Shrimp Sashimi",
+         "ingredient1bitId":2,
+         "ingredient2bitId":0,
+         "ingredient3bitId":0,
+         "ingredient4bitId":0,
+         "ingredientsBit":2
+      },
+      {
+         "bitId":4,
+         "name":"Sushi",
+         "ingredient1bitId":1,
+         "ingredient2bitId":4,
+         "ingredient3bitId":8,
+         "ingredient4bitId":0,
+         "ingredientsBit":13
+      },
+      {
+         "bitId":8,
+         "name":"Cucumber Sushi",
+         "ingredient1bitId":4,
+         "ingredient2bitId":8,
+         "ingredient3bitId":16,
+         "ingredient4bitId":0,
+         "ingredientsBit":28
+      }
+   ]
+}

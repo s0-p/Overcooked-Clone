@@ -6,7 +6,9 @@ public class IngredientTable : BasicTable
 {
     [SerializeField]
     GameObject _ingredientPrefab;
-
+    [SerializeField]
+    eINGREDIENT _type;
+    //---------------------------------------------------------------
     public override void Operate(GameObject player)
     {
         if (_ingredientPrefab != null)
@@ -15,6 +17,8 @@ public class IngredientTable : BasicTable
                         _ingredientPrefab,
                         transform.position + Vector3.up,
                         Quaternion.identity);
+
+            ingredient.GetComponent<IngredientCtrl>().BitId = (int)_type;
 
             ingredient.GetComponent<Rigidbody>().isKinematic = true;
 

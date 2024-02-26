@@ -1,0 +1,29 @@
+{
+   "items":[
+      {
+         "bitId":1,
+         "name":"Fish",
+         "cookeryId":1
+      },
+      {
+         "bitId":2,
+         "name":"Shrimp",
+         "cookeryId":1
+      },
+      {
+         "bitId":4,
+         "name":"Rice",
+         "cookeryId":2
+      },
+      {
+         "bitId":8,
+         "name":"Laver",
+         "cookeryId":0
+      },
+      {
+         "bitId":16,
+         "name":"Cucumber",
+         "cookeryId":1
+      }
+   ]
+}

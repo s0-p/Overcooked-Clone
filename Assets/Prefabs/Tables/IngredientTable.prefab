@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ingredientPrefab: {fileID: 7664838537736977487, guid: 07bcfca937fa70c4aa3e1026dd003848, type: 3}
+  _type: 0
 --- !u!1 &8476487436078297783
 GameObject:
   m_ObjectHideFlags: 0
