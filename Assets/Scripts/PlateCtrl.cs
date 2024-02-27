@@ -17,7 +17,25 @@ public class PlateCtrl : MonoBehaviour
     {
         _includedIngredientsBit = 0;
     }
-    void OnDisable() { Invoke("Spawn", _spawnDeley); }
+    void OnDisable()
+    {
+        Invoke("Spawn", _spawnDeley);
+    }
+    public void OnDisableCustom()
+    {
+        for (int index = 0; index < transform.childCount; index++)
+        {
+            Transform child = transform.GetChild(index);
+            child.gameObject.SetActive(true);
+
+            child.GetComponent<Rigidbody>().isKinematic = false;
+            child.GetComponentInChildren<Collider>().enabled = true;
+            child.parent = null;
+
+            child.gameObject.SetActive(false);
+        }
+        gameObject.SetActive(false);
+    }
     void Spawn()
     {
         transform.position = SpawnPosition;
@@ -29,14 +47,14 @@ public class PlateCtrl : MonoBehaviour
         if (collision.transform.CompareTag("Ingredient"))
         {
             Debug.Log("재료 넣기!");
-
+            
             _includedIngredientsBit += collision.transform.GetComponent<IngredientCtrl>().BitId;
-
-            collision.transform.GetComponent<Rigidbody>().isKinematic = true;
-            collision.transform.GetComponentInChildren<Collider>().enabled = false;
 
             collision.transform.parent = transform;
             collision.transform.position = transform.position + Vector3.up * 0.1f;
+            
+            collision.transform.GetComponent<Rigidbody>().isKinematic = true;
+            collision.transform.GetComponentInChildren<Collider>().enabled = false;
         }
     }
 }

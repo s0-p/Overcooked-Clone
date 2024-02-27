@@ -43,7 +43,7 @@ public struct SStage
     public int chapter;
     public int stage;
 
-    public WaitForSeconds limitedTime;
+    public int limitedTime;
 
     public int goalProfits1;
     public int goalProfits2;

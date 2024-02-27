@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7228356038414350148}
   - component: {fileID: 5310589806485076674}
   m_Layer: 0
-  m_Name: ServingTable
+  m_Name: ServingTable - InGameManager
   m_TagString: Table
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.92, y: 0, z: 0.15}
-  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8836081443968706749}
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f04e1800356d52419388899c39fba77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _uiManager: {fileID: 0}
   _chapterValue: 1
   _stageValue: 1
 --- !u!65 &5310589806485076674
