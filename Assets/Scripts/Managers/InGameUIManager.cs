@@ -14,6 +14,20 @@ public class InGameUIManager : MonoBehaviour
     }
     //-----------------------------------------------------------------------------------
     [SerializeField]
+    Transform _ordersContentTransform;
+    [SerializeField]
+    GameObject _orderPrefab;
+    public void CreateOrderSheet(SMenu menu)
+    {
+        GameObject orderSheet = Instantiate(_orderPrefab, _ordersContentTransform);
+        orderSheet.GetComponentInChildren<TMP_Text>().text = menu.name;
+    }
+    public void RemoveOrderSheet(int index)
+    {
+        Destroy(_ordersContentTransform.GetChild(index).gameObject);
+    }
+    //-----------------------------------------------------------------------------------
+    [SerializeField]
     GameObject _timePanel;
     TMP_Text _timeText;
     Slider _timeSlider;
@@ -31,16 +45,9 @@ public class InGameUIManager : MonoBehaviour
     }
     //-----------------------------------------------------------------------------------
     [SerializeField]
-    Transform _ordersContentTransform;
-    [SerializeField]
-    GameObject _orderPrefab;
-    public void CreateOrderSheet(SMenu menu)
+    TMP_Text _currentProfitsText;
+    public void UpdateProfits(int profits)
     {
-        GameObject orderSheet = Instantiate(_orderPrefab, _ordersContentTransform);
-        orderSheet.GetComponentInChildren<TMP_Text>().text = menu.name;
-    }
-    public void RemoveOrderSheet(int index)
-    {
-        Destroy(_ordersContentTransform.GetChild(index).gameObject);
+        _currentProfitsText.text = profits.ToString();
     }
 }

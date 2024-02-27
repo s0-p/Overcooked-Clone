@@ -34,7 +34,8 @@ public class PlayerAction : MonoBehaviour
         if (other.CompareTag("Table"))
             DetectTable(other);
 
-        else if (other.gameObject.layer == LayerMask.NameToLayer("Food"))
+        else if (other.CompareTag("Plate") || 
+                other.gameObject.layer == LayerMask.NameToLayer("Food"))
             DetectFood(other);
     }
     void OnTriggerStay(Collider other)
@@ -148,6 +149,8 @@ public class PlayerAction : MonoBehaviour
         foodRigidbody.isKinematic = false;
 
         _detectedFood.GetComponentInChildren<Collider>().enabled = true;
+
+        _detectedFood = null;
     }
     //-----------------------------------
     //  물건 던지기

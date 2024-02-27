@@ -13,7 +13,7 @@ public enum eCOOKERY
 }
 public enum eINGREDIENT
 {
-    None = 0,
+    None = -1,
     Fish,
     Shrimp,
     Rice,

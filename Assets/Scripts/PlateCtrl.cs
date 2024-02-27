@@ -44,11 +44,11 @@ public class PlateCtrl : MonoBehaviour
     //--------------------------------------------------------------
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.CompareTag("Ingredient"))
+        IngredientCtrl ingredientCtrl = collision.transform.GetComponent<IngredientCtrl>();
+        if (ingredientCtrl != null && ingredientCtrl.IsCooked)
         {
             Debug.Log("재료 넣기!");
-            
-            _includedIngredientsBit += collision.transform.GetComponent<IngredientCtrl>().BitId;
+            _includedIngredientsBit += ingredientCtrl.BitId;
 
             collision.transform.parent = transform;
             collision.transform.position = transform.position + Vector3.up * 0.1f;
