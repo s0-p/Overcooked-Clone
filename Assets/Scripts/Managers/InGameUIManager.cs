@@ -11,14 +11,20 @@ public class InGameUIManager : MonoBehaviour
     {
         _timeText = _timePanel.GetComponentInChildren<TMP_Text>();
         _timeSlider = _timePanel.GetComponentInChildren<Slider>();
+
+        //_poolManager.Init(, _orderPrefab);
     }
     //-----------------------------------------------------------------------------------
+    //  주문서UI 관리
     [SerializeField]
     Transform _ordersContentTransform;
     [SerializeField]
     GameObject _orderPrefab;
     [SerializeField]
     Sprite[] _menuSprites;
+    //----------------------------------------------------
+    ObjectPoolingManager _poolManager;
+    //----------------------------------------------------
     public void CreateOrderSheet(SMenu menu)
     {
         OrderSheetCtrl orderSheet = Instantiate(_orderPrefab, _ordersContentTransform).GetComponent<OrderSheetCtrl>();

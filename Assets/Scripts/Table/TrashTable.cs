@@ -21,6 +21,13 @@ public class TrashTable : BasicTable
         }
         OnObject.transform.localScale = originScale;
         OnObject.transform.parent = null;
-        OnObject.gameObject.SetActive(false);
+
+        IngredientCtrl ctrl = OnObject.GetComponent<IngredientCtrl>();
+        if (ctrl != null)
+            ctrl.PoolingManager.Return(OnObject.gameObject);
+        else
+        {
+            OnObject.GetComponent<PlateCtrl>(); //.PoolingManager.Return(OnObject.gameObject)
+        }
     }
 }

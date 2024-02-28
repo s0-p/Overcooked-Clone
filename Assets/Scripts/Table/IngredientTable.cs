@@ -9,21 +9,27 @@ public class IngredientTable : BasicTable
     [SerializeField]
     eINGREDIENT _type;
     //---------------------------------------------------------------
+    [SerializeField]
+    int _maxCount;
+    //---------------------------------------------------------------
+    ObjectPoolingManager _poolingManager;
+    //---------------------------------------------------------------
+    protected override void Awake()
+    {
+        base.Awake();
+        _poolingManager = GetComponent<ObjectPoolingManager>();
+    }
+    void Start() { _poolingManager.Init(_maxCount, _ingredientPrefab); }
     public override void Operate(GameObject player)
     {
-        if (_ingredientPrefab != null)
-        {
-            GameObject ingredient = Instantiate(
-                        _ingredientPrefab,
-                        transform.position + Vector3.up,
-                        Quaternion.identity);
+        GameObject ingredient = _poolingManager.Get();
+        ingredient.transform.position = transform.position + Vector3.up * 0.1f;
 
-            ingredient.GetComponent<IngredientCtrl>().BitId = (int)_type;
+        IngredientCtrl ingredientCtrl = ingredient.GetComponent<IngredientCtrl>();
+        ingredientCtrl.BitId = (int)_type;
+        ingredientCtrl.PoolingManager = _poolingManager;
 
-            ingredient.GetComponent<Rigidbody>().isKinematic = true;
-
-            player.GetComponent<PlayerMove>().enabled = false;
-            player.GetComponent<PlayerAnimation>().PickUpAni();
-        }
+        player.GetComponent<PlayerMove>().enabled = false;
+        player.GetComponent<PlayerAnimation>().PickUpAni();
     }
 }
