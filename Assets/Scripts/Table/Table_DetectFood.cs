@@ -11,11 +11,11 @@ public class Table_DetectFood : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Plate") ||
+        if (other.gameObject.layer == LayerMask.NameToLayer("Plate") ||
             other.gameObject.layer == LayerMask.NameToLayer("Food"))
         {
             Transform transform = other.transform;
-            if (transform.parent != null && !transform.parent.CompareTag("Table"))
+            if (transform.parent != null && transform.parent.gameObject.layer != LayerMask.NameToLayer("Table"))
                 transform = transform.parent;
            
             _tableBase.PutOnObject(transform);

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6558324808550771337}
   - component: {fileID: 4224474189566547975}
   - component: {fileID: 7124918745296305582}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Food Detection Collider
-  m_TagString: Table
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 8946150566142263517}
   m_Layer: 5
   m_Name: Slider
-  m_TagString: Table
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 7040799469035770264}
   m_Layer: 5
   m_Name: Fill Area
-  m_TagString: Table
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 6466512665378751854}
   m_Layer: 0
   m_Name: CuttingTable
-  m_TagString: Table
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 2307434107502411379}
   m_Layer: 5
   m_Name: Fill
-  m_TagString: Table
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 9187729844480695378}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Table
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 3388242073980562562}
   m_Layer: 5
   m_Name: Background
-  m_TagString: Table
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -532,9 +532,9 @@ GameObject:
   - component: {fileID: 1318416167482324900}
   - component: {fileID: 3642477185882241439}
   - component: {fileID: 7159482128965536648}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
-  m_TagString: Table
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -675,7 +675,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 647a44dda97f8a44a86319c533206b48, type: 3}
       propertyPath: m_TagString
-      value: Table
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 647a44dda97f8a44a86319c533206b48, type: 3}
       propertyPath: m_LocalScale.x

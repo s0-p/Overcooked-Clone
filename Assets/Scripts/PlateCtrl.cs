@@ -51,10 +51,14 @@ public class PlateCtrl : MonoBehaviour
             _includedIngredientsBit += ingredientCtrl.BitId;
 
             collision.transform.parent = transform;
-            collision.transform.position = transform.position + Vector3.up * 0.1f;
+            collision.transform.SetPositionAndRotation(
+                        transform.position + Vector3.up * 0.1f,
+                        Quaternion.identity
+                    );
             
             collision.transform.GetComponent<Rigidbody>().isKinematic = true;
             collision.transform.GetComponentInChildren<Collider>().enabled = false;
+            collision.gameObject.layer = 0;
         }
     }
 }

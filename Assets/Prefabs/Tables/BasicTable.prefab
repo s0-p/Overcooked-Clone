@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7988040789751744300}
   - component: {fileID: 7811746840838900062}
   - component: {fileID: 3769966984101462014}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Food Detection Collider
-  m_TagString: Table
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 2162824259242385706}
   m_Layer: 0
   m_Name: BasicTable
-  m_TagString: Table
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,9 +125,9 @@ GameObject:
   - component: {fileID: 5516705428359885305}
   - component: {fileID: 6018545364423976709}
   - component: {fileID: 6774564599949482077}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
-  m_TagString: Table
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

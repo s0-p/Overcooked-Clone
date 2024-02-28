@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerAction : MonoBehaviour
@@ -31,19 +32,19 @@ public class PlayerAction : MonoBehaviour
     //  테이블, 음식 감지
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Table"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Table"))
             DetectTable(other);
 
-        else if (other.CompareTag("Plate") || 
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Plate") || 
                 other.gameObject.layer == LayerMask.NameToLayer("Food"))
             DetectFood(other);
     }
     void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Table"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Table"))
             DetectTable(other);
 
-        else if (other.CompareTag("Plate") ||
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Plate") ||
                 other.gameObject.layer == LayerMask.NameToLayer("Food"))
             DetectFood(other);
     }
@@ -57,10 +58,10 @@ public class PlayerAction : MonoBehaviour
     }
     void DetectFood(Collider other)
     {
-        if (_detectedFood == null)
+        if (_detectedFood == null || _detectedFood.gameObject.layer == 0)
         {
             _detectedFood = other.transform;
-            if(_detectedFood.parent != null && !_detectedFood.parent.CompareTag("Table"))
+            if (_detectedFood.parent != null)
                 _detectedFood = _detectedFood.parent;
 
             _detectedFood.GetComponentInChildren<DetectedCtrl>().Enter();
@@ -68,7 +69,7 @@ public class PlayerAction : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Table"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Table"))
         {
             if (_detectedTable != null)
             {
@@ -77,7 +78,7 @@ public class PlayerAction : MonoBehaviour
             }
         }
 
-        else if (other.CompareTag("Plate") ||
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Plate") ||
                 other.gameObject.layer == LayerMask.NameToLayer("Food"))
         {
             if (_pickupTransform.childCount <= 0)
@@ -90,6 +91,11 @@ public class PlayerAction : MonoBehaviour
     //-----------------------------------
     void Update()
     {
+        if(_detectedFood != null)
+        {
+            Debug.Log(_detectedFood.gameObject.layer);
+        }
+
         //  Leftctrl 입력 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
@@ -149,8 +155,6 @@ public class PlayerAction : MonoBehaviour
         foodRigidbody.isKinematic = false;
 
         _detectedFood.GetComponentInChildren<Collider>().enabled = true;
-
-        _detectedFood = null;
     }
     //-----------------------------------
     //  물건 던지기

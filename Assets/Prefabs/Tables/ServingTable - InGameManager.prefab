@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5310589806485076674}
   m_Layer: 0
   m_Name: ServingTable - InGameManager
-  m_TagString: Table
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -435,9 +435,9 @@ GameObject:
   - component: {fileID: 692398867652826375}
   - component: {fileID: 8253472447069237771}
   - component: {fileID: 7920902956972978066}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
-  m_TagString: Table
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
