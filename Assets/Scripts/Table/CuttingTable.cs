@@ -36,8 +36,8 @@ public class CuttingTable : BasicTable
     {
         _isRunningCRTCutting = true;
         player.GetComponent<PlayerAnimation>().CuttingAni(true);
+        OnObject.GetComponentInChildren<Collider>().enabled = false;
 
-        OnObject.GetComponent<Rigidbody>().isKinematic = true;
         _slider.gameObject.SetActive(true);
         while (_slider.value < _slider.maxValue)
         {
@@ -50,7 +50,8 @@ public class CuttingTable : BasicTable
         player.GetComponent<PlayerAnimation>().CuttingAni(false);
         
         _IngredientCtrl.ChangeToCookedModel();
-        OnObject.GetComponent<Rigidbody>().isKinematic = false;
+        
+        OnObject.GetComponentInChildren<Collider>().enabled = true;
         _isRunningCRTCutting = false;
     }
     void OnTriggerExit(Collider other)
