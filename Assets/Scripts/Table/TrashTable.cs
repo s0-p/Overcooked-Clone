@@ -8,7 +8,6 @@ public class TrashTable : BasicTable
     public override void PutOnObject(Transform objectTransform)
     {
         base.PutOnObject(objectTransform);
-
         StartCoroutine(CRT_ThrowAway());
     }
     IEnumerator CRT_ThrowAway()
@@ -20,8 +19,8 @@ public class TrashTable : BasicTable
             OnObject.transform.Rotate(Vector3.up * 30f);
             yield return new WaitForSeconds(0.1f);
         }
-        OnObject.gameObject.SetActive(false);
         OnObject.transform.localScale = originScale;
         OnObject.transform.parent = null;
+        OnObject.gameObject.SetActive(false);
     }
 }

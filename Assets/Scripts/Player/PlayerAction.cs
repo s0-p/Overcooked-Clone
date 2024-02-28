@@ -91,6 +91,9 @@ public class PlayerAction : MonoBehaviour
     //-----------------------------------
     void Update()
     {
+        if (_detectedFood != null && !_detectedFood.gameObject.activeSelf)
+            _detectedFood = null;
+
         //  Leftctrl 입력 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
@@ -117,8 +120,14 @@ public class PlayerAction : MonoBehaviour
                     _detectedFood.GetComponent<Rigidbody>().isKinematic = true;
                     
                     //테이블 위 오브젝트를 가져올 경우
-                    if (_detectedTable != null && _detectedTable.OnObject != null)
+                    if (_detectedTable != null &&
+                        _detectedTable.OnObject != null)
+                    {
+                        if (_detectedTable.CompareTag("Trash Table"))
+                            return;
+
                         _detectedTable.OnObject = null;
+                    }
 
                     _playerMove.enabled = false;
                     _playerAnimation.PickUpAni();
@@ -170,7 +179,6 @@ public class PlayerAction : MonoBehaviour
     public void PauseCutting(bool isOn) 
     { 
         _knife.SetActive(isOn);
-        if(!isOn)
-            _detectedFood = null;
+        if(!isOn) _detectedFood = null;
     }
 }
