@@ -1,31 +1,33 @@
 using System.Collections.Generic;
+using System.Runtime.Versioning;
 using UnityEngine;
 
 public class DetectedCtrl : MonoBehaviour
 {
-    protected Renderer _renderer;
+    protected Renderer[] _renderer;
     //-----------------------------
     [SerializeField]
+    protected Shader _originalShader;
+    [SerializeField]
     protected Shader _detectedShader;
-    protected Shader[] _originalShaders;
     //-----------------------------
-    void Awake()
+    private void Awake()
     {
-        _renderer = GetComponent<Renderer>();
-        _originalShaders = new Shader[_renderer.materials.Length];
-        for (int index = 0; index < _originalShaders.Length; index++)
-            _originalShaders[index] = _renderer.materials[index].shader;
+        _renderer = GetComponentsInChildren<Renderer>();
     }
+    //-----------------------------
     void OnEnable() { Exit(); }
     //-----------------------------
     public void Enter() 
     {
-        for (int index = 0; index < _originalShaders.Length; index++)
-            _renderer.materials[index].shader = _detectedShader;
+        foreach (var renderer in _renderer)
+            foreach (var material in renderer.materials)
+                material.shader = _detectedShader;
     }
     public void Exit() 
     {
-        for (int index = 0; index < _originalShaders.Length; index++)
-            _renderer.materials[index].shader = _originalShaders[index];
+        foreach (var renderer in _renderer)
+            foreach (var material in renderer.materials)
+                material.shader = _originalShader;
     }
 }

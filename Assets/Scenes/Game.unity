@@ -373,7 +373,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 100, y: 100}
+  m_CellSize: {x: 120, y: 120}
   m_Spacing: {x: 15, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -2560,6 +2560,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ordersContentTransform: {fileID: 261662971}
   _orderPrefab: {fileID: 8613362100427721055, guid: b03362cbb039b1141bc55c4852d8c460, type: 3}
+  _menuSprites:
+  - {fileID: 21300000, guid: 8e4da7d4c5e094f429742305d1c1ac43, type: 3}
   _timePanel: {fileID: 1688542624}
   _currentProfitsText: {fileID: 330800928}
 --- !u!1001 &1633188546
