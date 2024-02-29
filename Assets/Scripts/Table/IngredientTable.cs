@@ -10,6 +10,9 @@ public class IngredientTable : BasicTable
     eINGREDIENT _type;
     //---------------------------------------------------------------
     [SerializeField]
+    eCOOKERY[] _cookerys;
+    //---------------------------------------------------------------
+    [SerializeField]
     int _maxCount;
     //---------------------------------------------------------------
     ObjectPoolingManager _poolingManager;
@@ -26,8 +29,10 @@ public class IngredientTable : BasicTable
         ingredient.transform.position = transform.position + Vector3.up * 0.1f;
 
         IngredientCtrl ingredientCtrl = ingredient.GetComponent<IngredientCtrl>();
-        ingredientCtrl.BitId = (int)_type;
+
+        ingredientCtrl.Id = (int)_type;
         ingredientCtrl.PoolingManager = _poolingManager;
+        ingredientCtrl._cookerys.AddRange(_cookerys);
 
         player.GetComponent<PlayerMove>().enabled = false;
         player.GetComponent<PlayerAnimation>().PickUpAni();

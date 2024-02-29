@@ -40,7 +40,6 @@ public class InGameManager : BasicTable
 
         _currentProfit = 0;
 
-
         _currentOrderCool = _orderDelay;
         for (int count = 0; count < 2; count++)
             Order();
@@ -94,8 +93,6 @@ public class InGameManager : BasicTable
             bool isCorrect = false;
             for (int index = 0; index < _orders.Count; index++)
             {
-                Debug.Log(_orders[index].name);
-                Debug.Log(_orders[index].ingredientsBit);
                 if (plate.IncludedIngredientsBit == _orders[index].ingredientsBit)
                 {
                     isCorrect = true;
@@ -115,6 +112,7 @@ public class InGameManager : BasicTable
             //  주문서를 생성하도록 주문서 쿨타임 제거
             _currentOrderCool = 0;
             _uiManager.UpdateProfits(_currentProfit);
+
             plate.OnDisableCustom();
         }
         else

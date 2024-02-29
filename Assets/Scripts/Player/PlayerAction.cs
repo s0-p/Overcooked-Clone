@@ -11,7 +11,7 @@ public class PlayerAction : MonoBehaviour
     //-----------------------------------
     [Space, SerializeField]
     Transform _pickupTransform;
-    Transform _detectedFood;
+    Pickupable _detectedPickupable;
     //-----------------------------------
     BasicTable _detectedTable;
     //-----------------------------------
@@ -58,13 +58,14 @@ public class PlayerAction : MonoBehaviour
     }
     void DetectFood(Collider other)
     {
-        if (_detectedFood == null || _detectedFood.gameObject.layer == 0)
+        if (_detectedPickupable == null || _detectedPickupable.gameObject.layer == 0)
         {
-            _detectedFood = other.transform;
-            if (_detectedFood.parent != null)
-                _detectedFood = _detectedFood.parent;
+            Transform transform = other.transform;
+            if (transform.parent != null)
+                transform = transform.parent;
 
-            _detectedFood.GetComponentInChildren<DetectedCtrl>().Enter();
+            _detectedPickupable = transform.GetComponent<Pickupable>();
+            _detectedPickupable.GetComponentInChildren<DetectedCtrl>().Enter();
         }
     }
     void OnTriggerExit(Collider other)
@@ -84,15 +85,15 @@ public class PlayerAction : MonoBehaviour
             if (_pickupTransform.childCount <= 0)
             {
                 other.GetComponent<DetectedCtrl>().Exit();
-                _detectedFood = null;
+                _detectedPickupable = null;
             }
         }
     }
     //-----------------------------------
     void Update()
     {
-        if (_detectedFood != null && !_detectedFood.gameObject.activeSelf)
-            _detectedFood = null;
+        if (_detectedPickupable?.gameObject.activeSelf == false)
+            _detectedPickupable = null;
 
         //  Leftctrl 입력 
         if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -112,53 +113,45 @@ public class PlayerAction : MonoBehaviour
         //Space 입력 -> 집기/놓기
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            //  빈 손 -> 집기
-            if (_pickupTransform.childCount <= 0)
-            {
-                if (_detectedFood != null)
-                {
-                    _detectedFood.GetComponent<Rigidbody>().isKinematic = true;
-                    
-                    //테이블 위 오브젝트를 가져올 경우
-                    if (_detectedTable != null &&
-                        _detectedTable.OnObject != null)
-                    {
-                        if (_detectedTable.CompareTag("Trash Table"))
-                            return;
-
-                        _detectedTable.OnObject = null;
-                    }
-
-                    _playerMove.enabled = false;
-                    _playerAnimation.PickUpAni();
-                }
-            }
             //  빈 손X -> 놓기
-            else
+            if(_pickupTransform.childCount > 0)
                 PutDown();
+
+            //  빈 손 -> 집기
+            else if (_detectedPickupable != null)
+            {
+                _detectedPickupable.GetComponent<Rigidbody>().isKinematic = true;
+
+                //쓰레기통이 아닌 테이블 위 오브젝트를 가져올 경우
+                if (_detectedTable?.OnObject != null)
+                {
+                    if (_detectedTable.CompareTag("Trash Table"))
+                        return;
+
+                    _detectedTable.OnObject = null;
+                }
+
+                _playerMove.enabled = false;
+                _playerAnimation.PickUpAni();
+            }
         }
     }
     //-----------------------------------
     //  물건 집기
     public void PickUp()
     {
-        _detectedFood.position = _pickupTransform.position;
-        _detectedFood.parent = _pickupTransform;
+        _detectedPickupable.transform.position = _pickupTransform.position;
+        _detectedPickupable.transform.parent = _pickupTransform;
 
-        _detectedFood.GetComponentInChildren<Collider>().enabled = false;
+        _detectedPickupable.GetComponentInChildren<Collider>().enabled = false;
         _playerMove.enabled = true;
     }
     public void PutDown()
     {
         _playerAnimation.PutDownAni();
 
-        Transform foodTransform = _pickupTransform.GetChild(0);
-        foodTransform.parent = null;
-
-        Rigidbody foodRigidbody = foodTransform.GetComponent<Rigidbody>();
-        foodRigidbody.isKinematic = false;
-
-        _detectedFood.GetComponentInChildren<Collider>().enabled = true;
+        _detectedPickupable.Freeze(false);
+        _detectedPickupable.transform.parent = null;
     }
     //-----------------------------------
     //  물건 던지기
@@ -166,19 +159,15 @@ public class PlayerAction : MonoBehaviour
     {
         _playerAnimation.PutDownAni();
 
-        _detectedFood.GetComponentInChildren<Collider>().enabled = true;
-
-        Rigidbody itemRigidbody = _pickupTransform.GetComponentInChildren<Rigidbody>();
-        itemRigidbody.isKinematic = false;
-
-        itemRigidbody.transform.parent = null;
-        itemRigidbody.AddForce(transform.forward * _throwPower);
+        _detectedPickupable.Freeze(true);
+        _detectedPickupable.GetComponent<Rigidbody>().AddForce(transform.forward * _throwPower);
+        _detectedPickupable.transform.parent = null;
     }
     //-----------------------------------
     // 컷팅 온오프
     public void PauseCutting(bool isOn) 
     { 
         _knife.SetActive(isOn);
-        if(!isOn) _detectedFood = null;
+        if(!isOn) _detectedPickupable = null;
     }
 }

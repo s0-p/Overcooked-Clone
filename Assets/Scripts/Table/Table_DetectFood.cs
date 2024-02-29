@@ -15,7 +15,7 @@ public class Table_DetectFood : MonoBehaviour
             other.gameObject.layer == LayerMask.NameToLayer("Food"))
         {
             Transform transform = other.transform;
-            if (transform.parent != null && transform.parent.gameObject.layer != LayerMask.NameToLayer("Table"))
+            if (transform.parent?.gameObject.layer != LayerMask.NameToLayer("Table"))
                 transform = transform.parent;
            
             _tableBase.PutOnObject(transform);

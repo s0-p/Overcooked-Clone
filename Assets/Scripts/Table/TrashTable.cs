@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class TrashTable : BasicTable
@@ -23,11 +22,8 @@ public class TrashTable : BasicTable
         OnObject.transform.parent = null;
 
         IngredientCtrl ctrl = OnObject.GetComponent<IngredientCtrl>();
-        if (ctrl != null)
-            ctrl.PoolingManager.Return(OnObject.gameObject);
-        else
-        {
-            OnObject.GetComponent<PlateCtrl>(); //.PoolingManager.Return(OnObject.gameObject)
-        }
+        ctrl?.PoolingManager.Return(OnObject.gameObject);
+        
+        //OnObject.GetComponent<PlateCtrl>(); //.PoolingManager.Return(OnObject.gameObject)
     }
 }

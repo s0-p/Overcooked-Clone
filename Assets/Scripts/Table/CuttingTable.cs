@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class CuttingTable : BasicTable
 {
+    [SerializeField]
+    eCOOKERY _type;
+    //------------------------------------------------------------
     Slider _slider;
     //------------------------------------------------------------
     IngredientCtrl _IngredientCtrl;
@@ -23,20 +26,16 @@ public class CuttingTable : BasicTable
     //------------------------------------------------------------
     public override void Operate(GameObject player)
     {
-        if (OnObject != null)
-        {
-            _IngredientCtrl = OnObject.GetComponent<IngredientCtrl>();
-            if(_IngredientCtrl != null &&
-                !_IngredientCtrl.IsCooked &&
-                !_isRunningCRTCutting) 
-                StartCoroutine(CRT_Cutting(player));
-        }
+        _IngredientCtrl = OnObject?.GetComponent<IngredientCtrl>();
+        if (_IngredientCtrl?._cookerys[0] == _type && !_isRunningCRTCutting)
+            StartCoroutine(CRT_Cutting(player));
     }
     IEnumerator CRT_Cutting(GameObject player)
     {
         _isRunningCRTCutting = true;
         player.GetComponent<PlayerAnimation>().CuttingAni(true);
-        OnObject.GetComponentInChildren<Collider>().enabled = false;
+
+        _IngredientCtrl.Freeze(true);
 
         _slider.gameObject.SetActive(true);
         while (_slider.value < _slider.maxValue)
@@ -50,8 +49,8 @@ public class CuttingTable : BasicTable
         player.GetComponent<PlayerAnimation>().CuttingAni(false);
         
         _IngredientCtrl.ChangeToCookedModel();
-        
-        OnObject.GetComponentInChildren<Collider>().enabled = true;
+        _IngredientCtrl.Freeze(false);
+
         _isRunningCRTCutting = false;
     }
     void OnTriggerExit(Collider other)

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour
@@ -10,14 +9,22 @@ public class DataManager : MonoBehaviour
     public static DataManager Instance => _instance;
     //---------------------------------------------------------------------------
     string _dataFolderPath = Application.dataPath + "/Data/";
-    string _ingredientFileName = "ingredient.json";
-    string _menuFileName = "menu.json";
     string _stageFileName = "stage.json";
+    string _menuFileName = "menu.json";
+    string _ingredientFileName = "ingredient.json";
+    //---------------------------------------------------------------------------
+    List<SStage> _stages = new List<SStage>();
+    List<SMenu> _menus = new List<SMenu>();
+    List<SIngredient> _ingredients = new List<SIngredient>();
     //---------------------------------------------------------------------------
     private void Awake()
     {
-        if(_instance == null) _instance = new DataManager();
+        _instance = this;
         DontDestroyOnLoad(gameObject);
+
+        _stages.AddRange(LoadData<SStage>(_stageFileName));
+        _menus.AddRange(LoadData<SMenu>(_menuFileName));
+        _ingredients.AddRange(LoadData<SIngredient>(_ingredientFileName));
     }
     public T[] LoadData<T>(string fileName)
     {
@@ -32,14 +39,14 @@ public class DataManager : MonoBehaviour
     }
     public SStage GetStage(int chapterValue, int stageValue)
     {
-        List<SStage> stages = new List<SStage>();
-        stages.AddRange(LoadData<SStage>(_stageFileName));
-        return stages.Find(i => i.chapter == chapterValue && i.stage == stageValue); 
+        return _stages.Find(s => s.chapter == chapterValue && s.stage == stageValue); 
     }
     public SMenu[] GetMenus(int menusBit) 
     {
-        List<SMenu> menus = new List<SMenu>();
-        menus.AddRange(LoadData<SMenu>(_menuFileName));
-        return menus.FindAll(i => (i.bitId & menusBit) > 0).ToArray();
+        return _menus.FindAll(m => (m.bitId & menusBit) > 0).ToArray();
+    }
+    public SIngredient GetIngredient(int bitId)
+    {
+        return _ingredients.Find(i => i.bitId == bitId);
     }
 }
