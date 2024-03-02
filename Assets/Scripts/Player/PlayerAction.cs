@@ -95,34 +95,32 @@ public class PlayerAction : MonoBehaviour
         if (_detectedPickupable?.gameObject.activeSelf == false)
             _detectedPickupable = null;
 
-        //  Leftctrl 입력 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        //  Leftctrl Down && 빈 손 && 감지된 테이블이 있으면 테이블 기능 실행
+        if (Input.GetKeyDown(KeyCode.LeftControl) &&
+            _pickupTransform.childCount <= 0)
         {
-            //  빈 손 x -> 던지기
-            if (_pickupTransform.childCount > 0)
-                Throw();
-
-            //  빈 손 && 감지된 테이블이 있으면 테이블 기능 실행
-            else if (_detectedTable != null)
-            {
-                _playerMove.LookAtTable(_detectedTable.transform);
-                _detectedTable.Operate(gameObject);
-            }
+            _playerMove.LookAtTable(_detectedTable.transform);
+            _detectedTable?.Operate(gameObject);
         }
 
-        //Space 입력 -> 집기/놓기
+        //  Leftctrl Up && 빈 손 x -> 던지기
+        else if (Input.GetKeyUp(KeyCode.LeftControl) &&
+            _pickupTransform.childCount > 0)
+            Throw();
+
+        //  Space 입력 -> 집기/놓기
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             //  빈 손X -> 놓기
             if(_pickupTransform.childCount > 0)
                 PutDown();
 
-            //  빈 손 -> 집기
+            //  빈 손 && 감지된 음식이 있으면 -> 집기
             else if (_detectedPickupable != null)
             {
                 _detectedPickupable.GetComponent<Rigidbody>().isKinematic = true;
 
-                //쓰레기통이 아닌 테이블 위 오브젝트를 가져올 경우
+                //  쓰레기통이 아닌 테이블 위 오브젝트를 가져올 경우
                 if (_detectedTable?.OnObject != null)
                 {
                     if (_detectedTable.CompareTag("Trash Table"))
@@ -159,7 +157,7 @@ public class PlayerAction : MonoBehaviour
     {
         _playerAnimation.PutDownAni();
 
-        _detectedPickupable.Freeze(true);
+        _detectedPickupable.Freeze(false);
         _detectedPickupable.GetComponent<Rigidbody>().AddForce(transform.forward * _throwPower);
         _detectedPickupable.transform.parent = null;
     }
