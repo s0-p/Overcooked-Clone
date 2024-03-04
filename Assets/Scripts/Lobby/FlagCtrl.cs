@@ -17,9 +17,10 @@ public class FlagCtrl : MonoBehaviour
     TMP_Text _title;
     [SerializeField]
     GameObject _infoWindow;
+    [SerializeField]
     TMP_Text[] _goalText;
     //----------------------------------------------------------------------------------
-    void Awake()
+    void Start()
     {
         _stageInfo = DataManager.Instance.GetStage(_chapter, _stage);
 
@@ -29,9 +30,7 @@ public class FlagCtrl : MonoBehaviour
         _goalText[1].text = _stageInfo.goalProfits1.ToString();
         _goalText[2].text = _stageInfo.goalProfits2.ToString();
         _goalText[3].text = _stageInfo.goalProfits3.ToString();
-    }
-    void Start()
-    {
+
         _infoWindow.SetActive(false);
     }
     void OnTriggerEnter(Collider other)
