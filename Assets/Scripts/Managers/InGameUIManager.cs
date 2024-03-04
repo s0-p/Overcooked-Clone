@@ -16,6 +16,7 @@ public class InGameUIManager : MonoBehaviour
         //_poolManager.Init(, _orderPrefab);
     }
     //-----------------------------------------------------------------------------------
+    //  Ready Message UI
     [SerializeField]
     GameObject _readyText;
     [SerializeField]
@@ -25,7 +26,6 @@ public class InGameUIManager : MonoBehaviour
         _readyText.gameObject.SetActive(true);
         _startText.gameObject.SetActive(false);
     }
-    //  Start UI
     public void OnOffReadyText(bool isOn) { _readyText.gameObject.SetActive(isOn); }
     public void OnOffStartText(bool isOn) { _startText.gameObject.SetActive(isOn); }
     //-----------------------------------------------------------------------------------
