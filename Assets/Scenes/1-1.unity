@@ -4336,6 +4336,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6352040171441802326, guid: bbd12e3465a437a40bf5800f004c450b, type: 3}
+      propertyPath: _maxCount
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6352040171441802326, guid: bbd12e3465a437a40bf5800f004c450b, type: 3}
       propertyPath: _cookerys.Array.size
       value: 1
       objectReference: {fileID: 0}
