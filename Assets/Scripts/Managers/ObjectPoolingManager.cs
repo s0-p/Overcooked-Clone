@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObjectPoolingManager : MonoBehaviour
 {
     Queue<GameObject> _poolingQueue = new Queue<GameObject>();
+    List<GameObject> _activatedGobjs = new List<GameObject>();
     public void Init(int maxCount, GameObject prefab)
     {
         for (int count = 0; count < maxCount; count++)
@@ -20,17 +21,34 @@ public class ObjectPoolingManager : MonoBehaviour
     {
         if (_poolingQueue.Count > 0)
         {
-            GameObject obj = _poolingQueue.Dequeue();
-            obj.transform.SetParent(null);
-            obj.SetActive(true);
-            return obj;
+            GameObject gobj = _poolingQueue.Dequeue();
+            _activatedGobjs.Add(gobj);
+
+            return InitGobj(gobj);
+        }
+        else
+        {
+            foreach (GameObject gobj in _activatedGobjs)
+            {
+                if (gobj.transform.parent == null)
+                    Return(gobj);
+                    return Get();
+            }
         }
         return null;
+    }
+    GameObject InitGobj(GameObject gobj)
+    {
+        gobj.transform.SetParent(null);
+        gobj.SetActive(true);
+        return gobj;
     }
     public void Return(GameObject obj)
     {
         obj.transform.SetParent(transform);
         obj.SetActive(false);
+
         _poolingQueue.Enqueue(obj);
+        _activatedGobjs.Remove(obj);
     }
 }
