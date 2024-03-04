@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CarCtrl : MonoBehaviour
@@ -12,6 +14,7 @@ public class CarCtrl : MonoBehaviour
     //--------------------------------------------------------------------------
     Rigidbody _rigidbody;
     //--------------------------------------------------------------------------
+    GameObject _flag;
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -29,6 +32,26 @@ public class CarCtrl : MonoBehaviour
                                 Quaternion.LookRotation(_moveDir),
                                 Time.deltaTime * _rotSpeed)
                 );
+        }
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            _flag?.GetComponent<FlagCtrl>().LoadScene();
+    }
+    //--------------------------------------------------------------------------
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Flag"))
+        {
+            _flag = collision.gameObject;
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Flag"))
+        {
+            _flag = null;
         }
     }
 }
