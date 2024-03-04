@@ -40,18 +40,14 @@ public class CarCtrl : MonoBehaviour
             _flag?.GetComponent<FlagCtrl>().LoadScene();
     }
     //--------------------------------------------------------------------------
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Flag"))
-        {
-            _flag = collision.gameObject;
-        }
+        if (other.gameObject.layer == LayerMask.NameToLayer("Flag"))
+            _flag = other.gameObject;
     }
-    private void OnCollisionExit(Collision collision)
+    void OnTriggerExit(Collider other)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Flag"))
-        {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Flag"))
             _flag = null;
-        }
     }
 }
