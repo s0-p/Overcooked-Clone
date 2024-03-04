@@ -29,6 +29,7 @@ public class InGameManager : BasicTable
     //[SerializeField]
     //첫 서빙이 있을 때부터 시간이 흐르도록 할건지 제어
     // bool _ = false;
+    bool _isStart = false;
     //----------------------------------------------------------------------------------
     void Start()
     {
@@ -43,29 +44,43 @@ public class InGameManager : BasicTable
         _currentOrderCool = _orderDelay;
         for (int count = 0; count < 2; count++)
             Order();
+
+        StartCoroutine(CRT_Start());
+    }
+    IEnumerator CRT_Start()
+    {
+        yield return new WaitForSeconds(1.5f);
+        _uiManager.OnOffReadyText(false);
+        _uiManager.OnOffStartText(true);
+        yield return new WaitForSeconds(1);
+        _uiManager.OnOffStartText(false);
+        _isStart = true;
     }
     void Update()
     {
-        //  제한 시간 체크
-        if (_currentTime <= 0)
+        if (_isStart)
         {
-            _currentTime = 0;
-        }
-        else
-        {
-            _currentTime -= Time.deltaTime;
-        }
-        _uiManager.UpdateTime(_currentTime);
+            //  제한 시간 체크
+            if (_currentTime <= 0)
+            {
+                _currentTime = 0;
+            }
+            else
+            {
+                _currentTime -= Time.deltaTime;
+            }
+            _uiManager.UpdateTime(_currentTime);
 
-        //  주문서 관리
-        if (_currentOrderCool <= 0)
-        {
-            _currentOrderCool = _orderDelay;
-            Order();
-        }
-        else
-        {
-            _currentOrderCool -= Time.deltaTime;
+            //  주문서 관리
+            if (_currentOrderCool <= 0)
+            {
+                _currentOrderCool = _orderDelay;
+                Order();
+            }
+            else
+            {
+                _currentOrderCool -= Time.deltaTime;
+            }
         }
     }
     //----------------------------------------------------------------------------------
