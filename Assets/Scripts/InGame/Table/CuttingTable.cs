@@ -27,7 +27,8 @@ public class CuttingTable : BasicTable
     public override void Operate(GameObject player)
     {
         _IngredientCtrl = OnObject?.GetComponent<IngredientCtrl>();
-        if (_IngredientCtrl?._cookerys[0] == _type &&
+        if (_IngredientCtrl?._cookerys.Count > 0 &&
+            _IngredientCtrl._cookerys[0] == _type &&
             !_isRunningCRTCutting)
             StartCoroutine(CRT_Cutting(player));
     }
