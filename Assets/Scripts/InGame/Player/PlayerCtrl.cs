@@ -20,7 +20,14 @@ public class PlayerCtrl : MonoBehaviour
     public void Selected(bool isOn)
     {
         _move.enabled = isOn;
-        _animation.MoveAni(false);
         _action.enabled = isOn;
+        _animation.MoveAni(false);
+    }
+    public void Pause(bool isOn)
+    {
+        _move.enabled = !isOn;
+        _action.enabled = !isOn;
+        _animation.enabled = !isOn;
+        _animator.enabled = !isOn;
     }
 }

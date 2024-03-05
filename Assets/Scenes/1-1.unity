@@ -4824,10 +4824,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 496844727154356181, guid: f902527594461394bae955c7836a3875, type: 3}
-      propertyPath: _spawnPosition.x
-      value: -3
-      objectReference: {fileID: 0}
     - target: {fileID: 737497349068022150, guid: f902527594461394bae955c7836a3875, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
@@ -4938,12 +4934,68 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7228356038414350148, guid: a05c032259c138a409f7c92ec9188643, type: 3}
+      propertyPath: _endEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7228356038414350148, guid: a05c032259c138a409f7c92ec9188643, type: 3}
       propertyPath: _startEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7228356038414350148, guid: a05c032259c138a409f7c92ec9188643, type: 3}
+      propertyPath: _endEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7228356038414350148, guid: a05c032259c138a409f7c92ec9188643, type: 3}
+      propertyPath: _endEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 975764368}
+    - target: {fileID: 7228356038414350148, guid: a05c032259c138a409f7c92ec9188643, type: 3}
+      propertyPath: _startEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7228356038414350148, guid: a05c032259c138a409f7c92ec9188643, type: 3}
+      propertyPath: _startEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 975764368}
+    - target: {fileID: 7228356038414350148, guid: a05c032259c138a409f7c92ec9188643, type: 3}
+      propertyPath: _endEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7228356038414350148, guid: a05c032259c138a409f7c92ec9188643, type: 3}
+      propertyPath: _endEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PauseChracters
       objectReference: {fileID: 0}
     - target: {fileID: 7228356038414350148, guid: a05c032259c138a409f7c92ec9188643, type: 3}
       propertyPath: _startEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7228356038414350148, guid: a05c032259c138a409f7c92ec9188643, type: 3}
+      propertyPath: _startEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 7228356038414350148, guid: a05c032259c138a409f7c92ec9188643, type: 3}
+      propertyPath: _endEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CharacterManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7228356038414350148, guid: a05c032259c138a409f7c92ec9188643, type: 3}
+      propertyPath: _endEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7228356038414350148, guid: a05c032259c138a409f7c92ec9188643, type: 3}
+      propertyPath: _startEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CharacterManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7228356038414350148, guid: a05c032259c138a409f7c92ec9188643, type: 3}
+      propertyPath: _startEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7228356038414350148, guid: a05c032259c138a409f7c92ec9188643, type: 3}
+      propertyPath: _endEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7228356038414350148, guid: a05c032259c138a409f7c92ec9188643, type: 3}
+      propertyPath: _startEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

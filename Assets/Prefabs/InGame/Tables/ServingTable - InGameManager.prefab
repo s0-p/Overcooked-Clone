@@ -47,6 +47,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f04e1800356d52419388899c39fba77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _endEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _uiManager: {fileID: 0}
   _chapterValue: 1
   _stageValue: 1

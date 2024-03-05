@@ -10,10 +10,19 @@ public class CharacterManager : MonoBehaviour
     void Awake()
     {
         _playerCtrls = GetComponentsInChildren<PlayerCtrl>();
+    }
+    void Start()
+    {
+        PauseChracters(true);
+    }
+    public void StartGame()
+    {
+        PauseChracters(false);
 
-        _playerCtrls[1].Selected(false);
         _currentPlayer = _playerCtrls[0];
-        _currentPlayer.Selected(true);
+        
+        _playerCtrls[0].Selected(true);
+        _playerCtrls[1].Selected(false);
     }
     void Update()
     {
@@ -23,5 +32,10 @@ public class CharacterManager : MonoBehaviour
             _currentPlayer = (_currentPlayer == _playerCtrls[0]) ? _playerCtrls[1] : _playerCtrls[0];
             _currentPlayer.Selected(true);
         }
+    }
+    public void PauseChracters(bool isOn)
+    {
+        foreach (PlayerCtrl playerCtrl in _playerCtrls)
+            playerCtrl.Pause(isOn);
     }
 }
