@@ -26,7 +26,7 @@ public class PlateCtrl : Pickupable
         for (int index = 0; index < transform.childCount; index++)
         {
             IngredientCtrl childCtrl = transform.GetChild(index).GetComponent<IngredientCtrl>();
-            childCtrl.PoolingManager.Return(childCtrl.gameObject);
+            childCtrl.ObjectPool.Return(childCtrl.gameObject);
         }
         gameObject.SetActive(false);
     }

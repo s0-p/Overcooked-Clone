@@ -63,7 +63,7 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField]
     Sprite[] _menuSprites;
     //----------------------------------------------------
-    ObjectPoolingManager _poolManager;
+    ObjectPool _ObjectPool;
     //----------------------------------------------------
     public void CreateOrderSheet(SMenu menu)
     {

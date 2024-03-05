@@ -22,7 +22,7 @@ public class TrashTable : BasicTable
         OnObject.transform.parent = null;
 
         IngredientCtrl ctrl = OnObject.GetComponent<IngredientCtrl>();
-        ctrl?.PoolingManager.Return(OnObject.gameObject);
+        ctrl?.ObjectPool.Return(OnObject.gameObject);
         
         //OnObject.GetComponent<PlateCtrl>(); //.PoolingManager.Return(OnObject.gameObject)
     }

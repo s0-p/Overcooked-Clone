@@ -15,23 +15,23 @@ public class IngredientTable : BasicTable
     [SerializeField]
     int _maxCount;
     //---------------------------------------------------------------
-    ObjectPoolingManager _poolingManager;
+    ObjectPool _objectPool;
     //---------------------------------------------------------------
     protected override void Awake()
     {
         base.Awake();
-        _poolingManager = GetComponent<ObjectPoolingManager>();
+        _objectPool = GetComponent<ObjectPool>();
     }
-    void Start() { _poolingManager.Init(_maxCount, _ingredientPrefab); }
+    void Start() { _objectPool.Init(_maxCount, _ingredientPrefab); }
     public override void Operate(GameObject player)
     {
-        GameObject ingredient = _poolingManager.Get();
+        GameObject ingredient = _objectPool.Get();
         ingredient.transform.position = transform.position + Vector3.up * 0.2f;
 
         IngredientCtrl ingredientCtrl = ingredient.GetComponent<IngredientCtrl>();
 
         ingredientCtrl.Id = (int)_type;
-        ingredientCtrl.PoolingManager = _poolingManager;
+        ingredientCtrl.ObjectPool = _objectPool;
         ingredientCtrl._cookerys.AddRange(_cookerys);
 
         player.GetComponent<PlayerMove>().enabled = false;

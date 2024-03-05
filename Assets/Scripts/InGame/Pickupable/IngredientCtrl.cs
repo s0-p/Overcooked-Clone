@@ -13,7 +13,7 @@ public class IngredientCtrl : Pickupable
     int _Id;
     public int Id { get { return _Id; } set { _Id = (int)Mathf.Pow(2, value); } }
     //--------------------------------------------------------------
-    public ObjectPoolingManager PoolingManager { get; set; }
+    public ObjectPool ObjectPool { get; set; }
     //--------------------------------------------------------------
     public List<eCOOKERY> _cookerys = new List<eCOOKERY>();
     //--------------------------------------------------------------

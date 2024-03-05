@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPoolingManager : MonoBehaviour
+public class ObjectPool : MonoBehaviour
 {
-    Queue<GameObject> _poolingQueue = new Queue<GameObject>();
+    Queue<GameObject> _pool = new Queue<GameObject>();
     List<GameObject> _activatedGobjs = new List<GameObject>();
     public void Init(int maxCount, GameObject prefab)
     {
         for (int count = 0; count < maxCount; count++)
-            _poolingQueue.Enqueue(CreateObject(prefab));
+            _pool.Enqueue(CreateObject(prefab));
     }
     GameObject CreateObject(GameObject prefab)
     {
@@ -19,9 +19,9 @@ public class ObjectPoolingManager : MonoBehaviour
     }
     public GameObject Get()
     {
-        if (_poolingQueue.Count > 0)
+        if (_pool.Count > 0)
         {
-            GameObject gobj = _poolingQueue.Dequeue();
+            GameObject gobj = _pool.Dequeue();
             _activatedGobjs.Add(gobj);
 
             return InitGobj(gobj);
@@ -48,7 +48,7 @@ public class ObjectPoolingManager : MonoBehaviour
         obj.transform.SetParent(transform);
         obj.SetActive(false);
 
-        _poolingQueue.Enqueue(obj);
+        _pool.Enqueue(obj);
         _activatedGobjs.Remove(obj);
     }
 }
