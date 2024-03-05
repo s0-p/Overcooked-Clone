@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
-    PlayerAction[] _playerCtrls;
-    PlayerAction _currentPlayer;
+    PlayerCtrl[] _playerCtrls;
+    PlayerCtrl _currentPlayer;
 
     void Awake()
     {
-        _playerCtrls = GetComponentsInChildren<PlayerAction>();
+        _playerCtrls = GetComponentsInChildren<PlayerCtrl>();
 
         _playerCtrls[1].Selected(false);
         _currentPlayer = _playerCtrls[0];

@@ -106,7 +106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3f3907cd529a9de45aa608f3228439a1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3f3907cd529a9de45aa608f3228439a1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -122,7 +122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3f3907cd529a9de45aa608f3228439a1, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3f3907cd529a9de45aa608f3228439a1, type: 3}
       propertyPath: m_LocalRotation.y
@@ -130,7 +130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3f3907cd529a9de45aa608f3228439a1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3f3907cd529a9de45aa608f3228439a1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -198,6 +198,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3f3907cd529a9de45aa608f3228439a1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7497622673439215123}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3f3907cd529a9de45aa608f3228439a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2509591530461340014}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3f3907cd529a9de45aa608f3228439a1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 496844727154356181}
@@ -284,6 +287,18 @@ CapsuleCollider:
   m_Height: 2.5485299
   m_Direction: 1
   m_Center: {x: 0, y: 1.181686, z: -0.17}
+--- !u!114 &2509591530461340014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105778803431553852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55659cf5547a59d41a8ee524e518f248, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &496844727154356181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1779600aead3e1840ad50ce8af4d94fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnPosition: {x: 0, y: 0, z: 0}
+  _spawnPosition: {x: -3, y: 0, z: 0}
   _moveSpeed: 3
   _fastMove: 50
   _rotSpeed: 20

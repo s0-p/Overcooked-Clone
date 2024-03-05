@@ -116,6 +116,7 @@ public class PlayerAction : MonoBehaviour
             Throw();
 
         //  Space 입력 -> 집기/놓기
+
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             //  빈 손X -> 놓기
