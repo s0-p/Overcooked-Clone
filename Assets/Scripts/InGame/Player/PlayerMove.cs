@@ -3,14 +3,18 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField]
+    Vector3 _spawnPosition;
+    //-----------------------------------
+    [SerializeField]
     float _moveSpeed = 5;
     [SerializeField]
+    float _fastMove = 10;
+    [SerializeField]
     float _rotSpeed = 10;
+
     Vector3 _moveDir;
     //-----------------------------------
     Rigidbody _rigidbody;
-    [Space, SerializeField]
-    float _fastMove = 10;
     //-----------------------------------
     PlayerAnimation _playerAnimation;
     //-----------------------------------
@@ -18,8 +22,8 @@ public class PlayerMove : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _playerAnimation = GetComponent<PlayerAnimation>();
-
     }
+    void Start() { _rigidbody.position = _spawnPosition; }
     //-----------------------------------
     void FixedUpdate() { Move(); }
     void Move()
@@ -42,6 +46,12 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftAlt))
             // 빠른 이동
             _rigidbody.AddForce(transform.forward * _fastMove, ForceMode.Impulse);
+
+        if (_rigidbody.velocity.y < -10)
+        {
+            _rigidbody.position = _spawnPosition;
+            //  스폰 이펙트 추가
+        }
     }
     //-----------------------------------
     public void LookAtTable(Transform table) { transform.LookAt(table.position); }
