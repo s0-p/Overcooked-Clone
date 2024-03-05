@@ -23,8 +23,8 @@ public class ObjectPool : MonoBehaviour
         {
             GameObject gobj = _pool.Dequeue();
             _activatedGobjs.Add(gobj);
-
-            return InitGobj(gobj);
+            InitGobj(gobj);
+            return gobj;
         }
         else
         {
@@ -37,11 +37,10 @@ public class ObjectPool : MonoBehaviour
         }
         return null;
     }
-    GameObject InitGobj(GameObject gobj)
+    void InitGobj(GameObject gobj)
     {
         gobj.transform.SetParent(null);
         gobj.SetActive(true);
-        return gobj;
     }
     public void Return(GameObject obj)
     {
