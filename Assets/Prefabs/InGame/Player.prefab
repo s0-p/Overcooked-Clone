@@ -296,9 +296,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1779600aead3e1840ad50ce8af4d94fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnPosition: {x: 0, y: 0, z: 0}
   _moveSpeed: 3
-  _rotSpeed: 20
   _fastMove: 50
+  _rotSpeed: 20
 --- !u!114 &1282637713572507336
 MonoBehaviour:
   m_ObjectHideFlags: 0

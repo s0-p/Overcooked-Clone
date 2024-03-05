@@ -29,6 +29,13 @@ public class PlayerAction : MonoBehaviour
         _playerAnimation = GetComponent<PlayerAnimation>();
     }
     //-----------------------------------
+    public void Selected(bool isOn)
+    {
+        _playerMove.enabled = isOn;
+        _playerAnimation.MoveAni(false);
+        enabled = isOn;
+    }
+    //-----------------------------------
     //  테이블, 음식 감지
     void OnTriggerEnter(Collider other)
     {

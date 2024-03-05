@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InGameManager : BasicTable
 {
     [SerializeField]
+    UnityEvent _startEvent;
+    [SerializeField]
+    UnityEvent _endEvent;
+    //----------------------------------------------------------------------------------
+    [SerializeField]
     InGameUIManager _uiManager;
     //----------------------------------------------------------------------------------
+    [Header("About Stage")]
     [SerializeField]
     int _chapterValue;
     [SerializeField]
@@ -15,6 +22,7 @@ public class InGameManager : BasicTable
     SStage _currentStage;
     SMenu[] _currentStageMenus;
     //----------------------------------------------------------------------------------
+    [Header("About Order")]
     [SerializeField]
     int _maxOrder;
     [SerializeField]
@@ -54,7 +62,9 @@ public class InGameManager : BasicTable
         _uiManager.OnOffStartText(true);
         yield return new WaitForSeconds(1);
         _uiManager.OnOffStartText(false);
+
         _isStart = true;
+        _startEvent.Invoke();
     }
     void Update()
     {
@@ -64,11 +74,11 @@ public class InGameManager : BasicTable
             if (_currentTime <= 0)
             {
                 _currentTime = 0;
+                _endEvent.Invoke();
             }
             else
-            {
                 _currentTime -= Time.deltaTime;
-            }
+
             _uiManager.UpdateTime(_currentTime);
 
             //  주문서 관리
@@ -78,9 +88,7 @@ public class InGameManager : BasicTable
                 Order();
             }
             else
-            {
                 _currentOrderCool -= Time.deltaTime;
-            }
         }
     }
     //----------------------------------------------------------------------------------
