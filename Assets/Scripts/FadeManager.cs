@@ -11,11 +11,10 @@ public class FadeManager : MonoBehaviour
     Canvas _canvas;
     //------------------------------------------------------------------------------------
     [SerializeField]
-    float _closeupPosZ;
-    [SerializeField]
-    float _fadeSpeed;
+    float _maxSize;
     [SerializeField]
     RectTransform _blackImageRectTrsf;
+    Vector3 _offset = new Vector3(1, 1, 1);
     //------------------------------------------------------------------------------------
     void Awake()
     {
@@ -31,10 +30,10 @@ public class FadeManager : MonoBehaviour
     }
     IEnumerator CRT_FadeIn(Action actionAfterFadeIn)
     {
-        while (_blackImageRectTrsf.localPosition.z > _closeupPosZ)
+        while (_blackImageRectTrsf.localScale.x < _maxSize)
         {
-            _blackImageRectTrsf.localPosition -= Vector3.forward * _fadeSpeed;
             yield return null;
+            _blackImageRectTrsf.localScale += _offset;
         }
         actionAfterFadeIn?.Invoke();
     }
@@ -44,10 +43,10 @@ public class FadeManager : MonoBehaviour
     }
     IEnumerator CRT_FadeOut(Action actionAfterFadeOut)
     {
-        while (_blackImageRectTrsf.localPosition.z < 0)
+        while (_blackImageRectTrsf.localScale.x > 1)
         {
-            _blackImageRectTrsf.localPosition += Vector3.forward * _fadeSpeed;
             yield return null;
+            _blackImageRectTrsf.localScale -= _offset;
         }
         actionAfterFadeOut?.Invoke();
     }
