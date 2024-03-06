@@ -19,6 +19,11 @@ public class CarCtrl : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
     }
+    void Start()
+    {
+        enabled = false;
+        FadeManager.Instance.StartFadeIn(() => enabled = true);
+    }
 
     void FixedUpdate()
     {
@@ -37,7 +42,7 @@ public class CarCtrl : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-            _flag?.GetComponent<FlagCtrl>().LoadScene();
+            _flag?.GetComponent<FlagCtrl>().LoadInGame();
     }
     //--------------------------------------------------------------------------
     void OnTriggerEnter(Collider other)

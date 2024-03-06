@@ -17,6 +17,11 @@ public class DataManager : MonoBehaviour
     List<SMenu> _menus = new List<SMenu>();
     List<SIngredient> _ingredients = new List<SIngredient>();
     //---------------------------------------------------------------------------
+    public bool isSeletedStage { get; set; }
+    public SStage SeletedStage { get; set; }
+    //---------------------------------------------------------------------------
+    public Sprite[] InGameImages;
+    //---------------------------------------------------------------------------
     private void Awake()
     {
         _instance = this;

@@ -47,5 +47,11 @@ public class FlagCtrl : MonoBehaviour
             _infoWindow.SetActive(false);
         }
     }
-    public void LoadScene() { SceneManager.LoadScene(_title.text); }
+    public void LoadInGame() 
+    {
+        DataManager.Instance.isSeletedStage = true;
+        DataManager.Instance.SeletedStage = _stageInfo;
+
+        FadeManager.Instance.StartFadeOut(() => SceneManager.LoadScene("Loading"));
+    }
 }

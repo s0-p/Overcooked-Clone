@@ -53,10 +53,14 @@ public class InGameManager : BasicTable
         for (int count = 0; count < 2; count++)
             Order();
 
-        StartCoroutine(CRT_Start());
+        _uiManager.OnOffReadyText(false);
+        _uiManager.OnOffStartText(false);
+
+        FadeManager.Instance.StartFadeIn(() => StartCoroutine(CRT_Start()));
     }
     IEnumerator CRT_Start()
     {
+        _uiManager.OnOffReadyText(true);
         yield return new WaitForSeconds(1.5f);
         _uiManager.OnOffReadyText(false);
         _uiManager.OnOffStartText(true);

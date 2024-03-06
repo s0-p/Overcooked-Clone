@@ -21,11 +21,6 @@ public class InGameUIManager : MonoBehaviour
     GameObject _readyText;
     [SerializeField]
     GameObject _startText;
-    void Start()
-    {
-        _readyText.gameObject.SetActive(true);
-        _startText.gameObject.SetActive(false);
-    }
     public void OnOffReadyText(bool isOn) { _readyText.gameObject.SetActive(isOn); }
     public void OnOffStartText(bool isOn) { _startText.gameObject.SetActive(isOn); }
     //-----------------------------------------------------------------------------------
