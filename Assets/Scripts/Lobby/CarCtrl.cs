@@ -18,13 +18,13 @@ public class CarCtrl : MonoBehaviour
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        Invoke("OnLoaded", Time.deltaTime);
     }
-    void Start()
+    void OnLoaded()
     {
-        enabled = false;
         FadeManager.Instance.StartFadeIn(() => enabled = true);
+        enabled = false;
     }
-
     void FixedUpdate()
     {
         _moveDir.x = Input.GetAxis("Horizontal");

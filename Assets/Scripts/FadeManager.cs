@@ -2,13 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FadeManager : MonoBehaviour
 {
     static FadeManager _instance;
     public static FadeManager Instance => _instance;
-    //------------------------------------------------------------------------------------
-    Canvas _canvas;
     //------------------------------------------------------------------------------------
     [SerializeField]
     float _maxSize;
@@ -21,11 +20,12 @@ public class FadeManager : MonoBehaviour
         _instance = this;
         DontDestroyOnLoad(gameObject);
 
-        _canvas = GetComponent<Canvas>();
+        //Test=============================================================
+        StartFadeOut(() => SceneManager.LoadScene("Lobby"));
+        //=============================================================Test
     }
     public void StartFadeIn(Action actionAfterFadeIn) 
     { 
-        _canvas.worldCamera = Camera.main;
         StartCoroutine(CRT_FadeIn(actionAfterFadeIn)); 
     }
     IEnumerator CRT_FadeIn(Action actionAfterFadeIn)
