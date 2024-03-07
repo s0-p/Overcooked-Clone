@@ -24,7 +24,7 @@ public class LoadingSceneManager : MonoBehaviour
     TMP_Text[] _goalProfitsText = new TMP_Text[3];
     //------------------------------------------------------------------
     [Space, SerializeField]
-    float _sliderSpped;
+    float _sliderSpeed;
     [SerializeField]
     Slider _loadingSlider;
     //------------------------------------------------------------------
