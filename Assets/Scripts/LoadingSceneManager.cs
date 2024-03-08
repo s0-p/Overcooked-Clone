@@ -56,7 +56,7 @@ public class LoadingSceneManager : MonoBehaviour
             _goalProfitsText[1].text = currentStage.goalProfits2.ToString();
             _goalProfitsText[2].text = currentStage.goalProfits3.ToString();
         }
-        //  선택된 스테이지가 없음
+        //  선택된 스테이지가 없는 경우
         else
         {
             _stageInfoBG.SetActive(false);
@@ -90,7 +90,7 @@ public class LoadingSceneManager : MonoBehaviour
             timer += Time.deltaTime;
             if (_asyncOp.progress < 0.9f)
             {
-                _loadingSlider.value = Mathf.Lerp(_loadingSlider.value, _asyncOp.progress, timer * _sliderSpped);
+                _loadingSlider.value = Mathf.Lerp(_loadingSlider.value, _asyncOp.progress, timer * _sliderSpeed);
                 if (_loadingSlider.value >= _asyncOp.progress)
                     timer = 0;
             }
@@ -99,7 +99,6 @@ public class LoadingSceneManager : MonoBehaviour
                 _loadingSlider.value = Mathf.Lerp(_loadingSlider.value, 1, timer);
                 if (_loadingSlider.value == 1)
                 {
-
                     FadeManager.Instance.StartFadeOut(() => _asyncOp.allowSceneActivation = true);
                     yield break;
                 }

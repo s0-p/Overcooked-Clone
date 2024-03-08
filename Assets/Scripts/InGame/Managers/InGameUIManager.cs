@@ -15,20 +15,68 @@ public class InGameUIManager : MonoBehaviour
 
         //_poolManager.Init(, _orderPrefab);
     }
+    void Start()
+    {
+        _readyText.transform.localScale = _offset;
+        _startText.transform.localScale = _offset;
+        _endText.transform.localScale = _offset;
+    }
     //-----------------------------------------------------------------------------------
-    //  Ready Message UI
+    //  Message UI
+    public enum eMESSAGE
+    {
+        Ready,
+        Start,
+        End
+    }
     [SerializeField]
     GameObject _readyText;
     [SerializeField]
     GameObject _startText;
-    public void OnOffReadyText(bool isOn) { _readyText.gameObject.SetActive(isOn); }
-    public void OnOffStartText(bool isOn) { _startText.gameObject.SetActive(isOn); }
+    [SerializeField]
+    GameObject _endText;
+    Vector3 _offset = new Vector3(0.1f, 0.1f, 0.1f);
+    public void OnOffMessage(eMESSAGE type, bool isOn) 
+    {
+        GameObject message = null;
+        switch(type)
+        {
+            case eMESSAGE.Ready:
+                message = _readyText;
+                break;
+            case eMESSAGE.Start:
+                message = _startText;
+                break;
+            case eMESSAGE.End:
+                message = _endText;
+                break;
+        }
+
+        message?.SetActive(isOn);
+        if (isOn) StartCoroutine(CRT_ShowMessage(message));
+    }
+    IEnumerator CRT_ShowMessage(GameObject text)
+    {
+        while (text.transform.localScale.x < 1)
+        {
+            yield return new WaitForSeconds(0.02f);
+            text.transform.localScale += _offset;
+        }
+    }
     //-----------------------------------------------------------------------------------
     //  시간 UI
     [Space, SerializeField]
     GameObject _timePanel;
     TMP_Text _timeText;
     Slider _timeSlider;
+    [SerializeField]
+    Image _timeSliderFill;
+    [SerializeField]
+    Color _maxTimeColor;
+    [SerializeField]
+    Color _midTimeColor;
+    [SerializeField]
+    Color _minTimeColor;
     public void SetLimitedTime(int limitedTime)
     {
         _timeSlider.maxValue = limitedTime;
@@ -40,6 +88,12 @@ public class InGameUIManager : MonoBehaviour
     {
         _timeSlider.value = remainTime;
         _timeText.text = string.Format("{0:D2}:{1:D2}", (int)_timeSlider.value / 60, (int)_timeSlider.value % 60);
+
+        float remainTimeRatio = _timeSlider.value / _timeSlider.maxValue;
+        if (_timeSlider.value / _timeSlider.maxValue > 0.5f)
+            _timeSliderFill.color = Color.Lerp(_midTimeColor, _maxTimeColor, (remainTimeRatio - 0.5f) * 2);
+        else
+            _timeSliderFill.color = Color.Lerp(_minTimeColor, _midTimeColor, remainTimeRatio * 2);
     }
     //-----------------------------------------------------------------------------------
     //  수익 UI
@@ -58,7 +112,7 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField]
     Sprite[] _menuSprites;
     //----------------------------------------------------
-    ObjectPool _ObjectPool;
+    //ObjectPool _ObjectPool;
     //----------------------------------------------------
     public void CreateOrderSheet(SMenu menu)
     {

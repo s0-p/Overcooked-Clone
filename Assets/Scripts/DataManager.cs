@@ -17,9 +17,6 @@ public class DataManager : MonoBehaviour
     List<SMenu> _menus = new List<SMenu>();
     List<SIngredient> _ingredients = new List<SIngredient>();
     //---------------------------------------------------------------------------
-    public bool isSeletedStage { get; set; }
-    public SStage SeletedStage { get; set; }
-    //---------------------------------------------------------------------------
     public Sprite[] InGameImages;
     //---------------------------------------------------------------------------
     private void Awake()
@@ -53,5 +50,30 @@ public class DataManager : MonoBehaviour
     public SIngredient GetIngredient(int bitId)
     {
         return _ingredients.Find(i => i.bitId == bitId);
+    }
+    //---------------------------------------------------------------------------
+    public bool isSeletedStage { get; set; }
+    public SStage SeletedStage { get; set; }
+    public struct SResult
+    {
+        public int deliveredCount;
+        public int deliveredProfit;
+
+        public int failedCount;
+        public int failedProfit;
+
+        public int totalProfit;
+    }
+    public SResult ResultInfo = new SResult();
+    //---------------------------------------------------------------------------
+    public void SetResultInfo(int deliveredCount, int deliveredProfit, int failedCount, int failedProfit, int totalProfit)
+    {
+        ResultInfo.deliveredCount = deliveredCount;
+        ResultInfo.deliveredProfit = deliveredProfit;
+
+        ResultInfo.failedCount = failedCount;
+        ResultInfo.failedProfit = failedProfit;
+
+        ResultInfo.totalProfit = totalProfit;
     }
 }

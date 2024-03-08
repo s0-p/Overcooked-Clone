@@ -305,7 +305,7 @@ MonoBehaviour:
   _tipText: {fileID: 533177934}
   _stageInfoBG: {fileID: 1030264927}
   _goalProfits: {fileID: 1081812115}
-  _sliderSpped: 0.1
+  _sliderSpeed: 0.01
   _loadingSlider: {fileID: 218554667}
 --- !u!1 &218554665
 GameObject:
