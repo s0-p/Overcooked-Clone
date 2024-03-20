@@ -48,9 +48,10 @@ public class PlateCtrl : Pickupable
                         transform.position + Vector3.up * 0.1f,
                         Quaternion.identity
                     );
-
             ingredientCtrl.Freeze(true);
             ingredientCtrl.gameObject.layer = 0;
+
+            ingredientCtrl.GetComponentInChildren<DetectedCtrl>()?.Exit();
         }
     }
 }
