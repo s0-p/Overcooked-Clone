@@ -104,10 +104,10 @@ public class PlayerAction : MonoBehaviour
 
         //  Leftctrl Down && 빈 손 && 감지된 테이블이 있으면 테이블 기능 실행
         if (Input.GetKeyDown(KeyCode.LeftControl) &&
-            _pickupTransform.childCount <= 0)
+            _pickupTransform.childCount <= 0 && _detectedTable != null)
         {
             _playerMove.LookAtTable(_detectedTable.transform);
-            _detectedTable?.Operate(gameObject);
+            _detectedTable.Operate(gameObject);
         }
 
         //  Leftctrl Up && 빈 손 x -> 던지기
@@ -116,7 +116,6 @@ public class PlayerAction : MonoBehaviour
             Throw();
 
         //  Space 입력 -> 집기/놓기
-
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             //  빈 손X -> 놓기
