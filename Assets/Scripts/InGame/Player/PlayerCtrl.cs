@@ -9,6 +9,9 @@ public class PlayerCtrl : MonoBehaviour
     PlayerAction _action;
     PlayerAnimation _animation;
     //-------------------------------------------------------------
+    [SerializeField]
+    GameObject _seletedMark;
+    //-------------------------------------------------------------
     void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -21,6 +24,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         _move.enabled = isOn;
         _action.enabled = isOn;
+        _seletedMark.SetActive(isOn);
         _animation.MoveAni(false);
     }
     public void Pause(bool isOn)

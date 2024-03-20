@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
+    //  anystate 사용 필요
+
     Animator _animator;
     PlayerAction _playerAction;
     void Awake() 
