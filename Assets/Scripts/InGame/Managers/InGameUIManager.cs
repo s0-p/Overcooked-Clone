@@ -1,41 +1,27 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InGameUIManager : MonoBehaviour
 {
-    void Awake()
-    {
-        _timeText = _timePanel.GetComponentInChildren<TMP_Text>();
-        _timeSlider = _timePanel.GetComponentInChildren<Slider>();
-
-        //_poolManager.Init(, _orderPrefab);
-    }
-    void Start()
-    {
-        _readyText.transform.localScale = _offset;
-        _startText.transform.localScale = _offset;
-        _endText.transform.localScale = _offset;
-    }
+    static InGameUIManager _instance;
+    public static InGameUIManager Instance => _instance;
     //-----------------------------------------------------------------------------------
-    //  Message UI
     public enum eMESSAGE
     {
         Ready,
         Start,
         End
     }
+    [Header("Message UI")]
     [SerializeField]
     GameObject _readyText;
     [SerializeField]
     GameObject _startText;
     [SerializeField]
     GameObject _endText;
-    Vector3 _offset = new Vector3(0.1f, 0.1f, 0.1f);
+    Vector3 _messageOffset = new Vector3(0.1f, 0.1f, 0.1f);
     public void OnOffMessage(eMESSAGE type, bool isOn) 
     {
         GameObject message = null;
@@ -60,12 +46,20 @@ public class InGameUIManager : MonoBehaviour
         while (text.transform.localScale.x < 1)
         {
             yield return new WaitForSeconds(0.02f);
-            text.transform.localScale += _offset;
+            text.transform.localScale += _messageOffset;
         }
     }
     //-----------------------------------------------------------------------------------
-    //  시간 UI
-    [Space, SerializeField]
+    [Header("수익 UI")]
+    [SerializeField]
+    TMP_Text _currentProfitsText;
+    public void UpdateProfits(int profits)
+    {
+        _currentProfitsText.text = profits.ToString();
+    }
+    //-----------------------------------------------------------------------------------
+    [Header("시간 UI")]
+    [SerializeField]
     GameObject _timePanel;
     TMP_Text _timeText;
     Slider _timeSlider;
@@ -96,34 +90,18 @@ public class InGameUIManager : MonoBehaviour
             _timeSliderFill.color = Color.Lerp(_minTimeColor, _midTimeColor, remainTimeRatio * 2);
     }
     //-----------------------------------------------------------------------------------
-    //  수익 UI
-    [Space, SerializeField]
-    TMP_Text _currentProfitsText;
-    public void UpdateProfits(int profits)
-    {
-        _currentProfitsText.text = profits.ToString();
-    }
-    //-----------------------------------------------------------------------------------
-    //  주문서 UI
-    [Space, SerializeField]
-    Transform _ordersContentTransform;
-    [SerializeField]
-    GameObject _orderPrefab;
-    [SerializeField]
-    Sprite[] _menuSprites;
-    //----------------------------------------------------
-    //ObjectPool _ObjectPool;
-    //----------------------------------------------------
-    public void CreateOrderSheet(SMenu menu)
-    {
-        OrderSheetCtrl orderSheet = Instantiate(_orderPrefab, _ordersContentTransform).GetComponent<OrderSheetCtrl>();
-
-        if((int)Mathf.Log(menu.bitId, 2) < _menuSprites.Length)
-            orderSheet.SetMenuImage(_menuSprites[(int)Mathf.Log(menu.bitId, 2)]);
-    }
-    public void RemoveOrderSheet(int index)
-    {
-        Destroy(_ordersContentTransform.GetChild(index).gameObject);
-    }
     
+    void Awake()
+    {
+        _instance = this;
+
+        _timeText = _timePanel.GetComponentInChildren<TMP_Text>();
+        _timeSlider = _timePanel.GetComponentInChildren<Slider>();
+    }
+    void Start()
+    {
+        _readyText.transform.localScale = _messageOffset;
+        _startText.transform.localScale = _messageOffset;
+        _endText.transform.localScale = _messageOffset;
+    }
 }

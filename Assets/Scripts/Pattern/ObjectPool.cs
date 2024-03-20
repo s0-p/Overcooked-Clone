@@ -7,6 +7,7 @@ public class ObjectPool : MonoBehaviour
 {
     Queue<GameObject> _pool = new Queue<GameObject>();
     List<GameObject> _activatedGobjs = new List<GameObject>();
+    public List<GameObject> ActivatedGobjs { get { return _activatedGobjs; } }
     public void Init(int maxCount, GameObject prefab)
     {
         for (int count = 0; count < maxCount; count++)
@@ -33,7 +34,7 @@ public class ObjectPool : MonoBehaviour
             {
                 if (gobj.transform.parent == null)
                     Return(gobj);
-                    return Get();
+                return Get();
             }
         }
         return null;
@@ -47,7 +48,7 @@ public class ObjectPool : MonoBehaviour
     {
         obj.transform.SetParent(transform);
         obj.SetActive(false);
-
+        
         _pool.Enqueue(obj);
         _activatedGobjs.Remove(obj);
     }
