@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,8 @@ public class FadeManager : MonoBehaviour
     //------------------------------------------------------------------------------------
     [SerializeField]
     float _maxSize;
+    [SerializeField]
+    float _fadeSpeed;
     [SerializeField]
     RectTransform _blackImageRectTrsf;
     Vector3 _offset = new Vector3(1, 1, 1);
@@ -33,7 +36,7 @@ public class FadeManager : MonoBehaviour
         while (_blackImageRectTrsf.localScale.x < _maxSize)
         {
             yield return null;
-            _blackImageRectTrsf.localScale += _offset;
+            _blackImageRectTrsf.localScale += Time.deltaTime * _fadeSpeed * _offset;
         }
         actionAfterFadeIn?.Invoke();
     }
@@ -43,10 +46,10 @@ public class FadeManager : MonoBehaviour
     }
     IEnumerator CRT_FadeOut(Action actionAfterFadeOut)
     {
-        while (_blackImageRectTrsf.localScale.x > 1)
+        while (_blackImageRectTrsf.localScale.x > 2)
         {
             yield return null;
-            _blackImageRectTrsf.localScale -= _offset;
+            _blackImageRectTrsf.localScale -= Time.deltaTime * _fadeSpeed * _offset;
         }
         actionAfterFadeOut?.Invoke();
     }
