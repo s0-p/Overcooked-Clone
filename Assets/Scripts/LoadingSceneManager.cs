@@ -16,6 +16,7 @@ public class LoadingSceneManager : MonoBehaviour
     //  Lobby -> In Game UI
     [Space, SerializeField]
     GameObject _stageInfoBG;
+    [SerializeField]
     Image _inGameImage;
     TMP_Text _stageTitle;
 
@@ -32,7 +33,6 @@ public class LoadingSceneManager : MonoBehaviour
     //------------------------------------------------------------------
     void Awake()
     {
-        _inGameImage = _stageInfoBG.GetComponentInChildren<Image>();
         _stageTitle = _stageInfoBG.GetComponentInChildren<TMP_Text>();
 
         _goalProfitsText = _goalProfits.GetComponentsInChildren<TMP_Text>();
@@ -48,8 +48,8 @@ public class LoadingSceneManager : MonoBehaviour
             _goalProfits.SetActive(true);
 
             SStage currentStage = DataManager.Instance.SeletedStage;
-
-            //_inGameImage.sprite = DataManager.Instance.InGameImages[currentStage.id];
+            if (currentStage.id < DataManager.Instance.InGameImages.Length)
+                _inGameImage.sprite = DataManager.Instance.InGameImages[currentStage.id];
             _stageTitle.text = $"{currentStage.chapter}-{currentStage.stage}";
 
             _goalProfitsText[0].text = currentStage.goalProfits1.ToString();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class FlagCtrl : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class FlagCtrl : MonoBehaviour
     [SerializeField]
     GameObject _infoWindow;
     [SerializeField]
+    Image _inGameImage;
     TMP_Text[] _goalText;
     //----------------------------------------------------------------------------------
     void Start()
@@ -25,6 +27,8 @@ public class FlagCtrl : MonoBehaviour
         _stageInfo = DataManager.Instance.GetStage(_chapter, _stage);
 
         _title.text = $"{_chapter}-{_stage}";
+        if(_stageInfo.id < DataManager.Instance.InGameImages.Length)
+        _inGameImage.sprite = DataManager.Instance.InGameImages[_stageInfo.id];
 
         _goalText = GetComponentsInChildren<TMP_Text>();
         _goalText[1].text = _stageInfo.goalProfits1.ToString();
