@@ -64,17 +64,12 @@ public class ResultManager : MonoBehaviour
         _deliveredProfit.text = resultInfo.deliveredProfit.ToString();
 
         _failedCount.text = resultInfo.failedCount.ToString();
-        _failedProfit.text = resultInfo.failedProfit.ToString();
+        _failedProfit.text = (-resultInfo.failedProfit).ToString();
 
         _totalProfit.text = resultInfo.totalProfit.ToString();
 
-
         StartCoroutine(CRT_ShowResult());
-        //Test================================================================
-        StartCoroutine(CRT_ShowStars(100));
-        //================================================================Test
-
-        //ShowStars(resultInfo.totalProfit);
+        StartCoroutine(CRT_ShowStars(resultInfo.totalProfit));
     }
     //-----------------------------------------------------------------------------------
     IEnumerator CRT_ShowStars(int totalProfit)
@@ -84,7 +79,7 @@ public class ResultManager : MonoBehaviour
 
         for (int index = 0; index < _goalProfitsText.Length; index++)
         {
-            if (totalProfit > int.Parse(_goalProfitsText[index].text))
+            if (totalProfit >= int.Parse(_goalProfitsText[index].text))
                 yield return StartCoroutine(CRT_StarEffect(_filledStars[index].transform));
             else
                 break;
