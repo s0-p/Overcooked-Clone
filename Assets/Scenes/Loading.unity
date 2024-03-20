@@ -304,6 +304,7 @@ MonoBehaviour:
   _tipImage: {fileID: 477316836}
   _tipText: {fileID: 533177934}
   _stageInfoBG: {fileID: 1030264927}
+  _inGameImage: {fileID: 459107667}
   _goalProfits: {fileID: 1081812115}
   _sliderSpeed: 0.01
   _loadingSlider: {fileID: 218554667}
@@ -1340,7 +1341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1030264928
 RectTransform:
   m_ObjectHideFlags: 0

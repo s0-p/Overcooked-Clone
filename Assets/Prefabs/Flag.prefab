@@ -447,7 +447,7 @@ MonoBehaviour:
   _stage: 1
   _title: {fileID: 2502318535904409368}
   _infoWindow: {fileID: 624230932353383901}
-  _goalText: []
+  _inGameImage: {fileID: 1375121465499247393}
 --- !u!1 &1390353592998814352
 GameObject:
   m_ObjectHideFlags: 0
