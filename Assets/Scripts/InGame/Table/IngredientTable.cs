@@ -26,7 +26,8 @@ public class IngredientTable : BasicTable
     public override void Operate(GameObject player)
     {
         GameObject ingredient = _objectPool.Get();
-        ingredient.transform.position = transform.position + Vector3.up * 0.2f;
+        ingredient.transform.position = transform.position +
+                                        (player.transform.position - transform.position) * 0.5f;
 
         IngredientCtrl ingredientCtrl = ingredient.GetComponent<IngredientCtrl>();
 
