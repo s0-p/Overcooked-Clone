@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -8,10 +7,10 @@ public class DataManager : MonoBehaviour
     static DataManager _instance;
     public static DataManager Instance => _instance;
     //---------------------------------------------------------------------------
-    string _dataFolderPath = Application.dataPath + "/Data/";
-    string _stageFileName = "stage.json";
-    string _menuFileName = "menu.json";
-    string _ingredientFileName = "ingredient.json";
+    string _dataFolderPath = "Data/";
+    string _stageFileName = "stage";
+    string _menuFileName = "menu";
+    string _ingredientFileName = "ingredient";
     //---------------------------------------------------------------------------
     List<SStage> _stages = new List<SStage>();
     List<SMenu> _menus = new List<SMenu>();
@@ -31,13 +30,8 @@ public class DataManager : MonoBehaviour
     public T[] LoadData<T>(string fileName)
     {
         string path = Path.Combine(_dataFolderPath, fileName);
-        if (File.Exists(path))
-        {
-            string jsonString = File.ReadAllText(path);
-            return JsonUtility.FromJson<JsonWrapper<T>>(jsonString).items;
-        }
-
-        return null;
+        TextAsset jsonText = Resources.Load(path) as TextAsset;
+        return JsonUtility.FromJson<JsonWrapper<T>>(jsonText.ToString()).items;
     }
     public SStage GetStage(int chapterValue, int stageValue)
     {
