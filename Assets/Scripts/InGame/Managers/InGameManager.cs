@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -37,6 +35,9 @@ public class InGameManager : BasicTable
     // bool _isOperateTimerAfterFirstServing;
     // bool _isOperateTimer = false;
     bool _isStart = false;
+    //----------------------------------------------------------------------------------
+    [SerializeField]
+    ParticleSystem _servingParticle;
     //----------------------------------------------------------------------------------
     void Start()
     {
@@ -107,8 +108,9 @@ public class InGameManager : BasicTable
         PlateCtrl plate = other.GetComponent<PlateCtrl>();
         if (plate != null)
         {
-            OrderManger.Instance.CheckOrder(plate.IncludedIngredientsBit);
-
+            if(OrderManger.Instance.CheckOrder(plate.IncludedIngredientsBit))
+                _servingParticle.Play();
+            
             InGameUIManager.Instance.UpdateProfits(CurrentProfit);
             plate.OnDisableCustom();
         }
