@@ -11,6 +11,8 @@ public class PlayerCtrl : MonoBehaviour
     //-------------------------------------------------------------
     [SerializeField]
     GameObject _seletedMark;
+    [SerializeField]
+    ParticleSystem _switchParticle;
     //-------------------------------------------------------------
     void Awake()
     {
@@ -22,6 +24,7 @@ public class PlayerCtrl : MonoBehaviour
     //-------------------------------------------------------------
     public void Selected(bool isOn)
     {
+        if(isOn) _switchParticle.Play();
         _move.enabled = isOn;
         _action.enabled = isOn;
         _seletedMark.SetActive(isOn);
