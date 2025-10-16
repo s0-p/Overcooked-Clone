@@ -43,14 +43,12 @@ public class InGameManager : BasicTable
     {
         _instance = this;
 
-        _currentStage = DataManager.Instance.SeletedStage;
-
+        _currentStage = DataManager.Instance.SelectedStage;
         _currentTime = _currentStage.limitedTime;
         //Test=============================================================
         _currentTime = 30;
         //=============================================================Test
         InGameUIManager.Instance.SetLimitedTime(_currentStage.limitedTime);
-
         CurrentProfit = 0;
 
         InGameUIManager.Instance.OnOffMessage(InGameUIManager.eMESSAGE.Ready, false);

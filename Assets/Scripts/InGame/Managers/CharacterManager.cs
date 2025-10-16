@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
     PlayerCtrl[] _playerCtrls;
-    PlayerCtrl _currentPlayer;
+    int _currentPlayerIndex;
 
     void Awake()
     {
@@ -19,7 +17,7 @@ public class CharacterManager : MonoBehaviour
     {
         PauseChracters(false);
 
-        _currentPlayer = _playerCtrls[0];
+        _currentPlayerIndex = 0;
         
         _playerCtrls[0].Selected(true);
         _playerCtrls[1].Selected(false);
@@ -28,9 +26,9 @@ public class CharacterManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            _currentPlayer.Selected(false);
-            _currentPlayer = (_currentPlayer == _playerCtrls[0]) ? _playerCtrls[1] : _playerCtrls[0];
-            _currentPlayer.Selected(true);
+            _playerCtrls[_currentPlayerIndex].Selected(false);
+            _currentPlayerIndex ^= 1;
+            _playerCtrls[_currentPlayerIndex].Selected(true);
         }
     }
     public void PauseChracters(bool isOn)

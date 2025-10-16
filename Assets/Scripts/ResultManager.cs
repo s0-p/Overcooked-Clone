@@ -20,12 +20,10 @@ public class ResultManager : MonoBehaviour
 
     [SerializeField]
     Vector3 _minScale;
-
     [SerializeField]
     float _maxFilledStarSize;
     [SerializeField]
     float _finalFilledStarSize;
-
     Vector3 _offset = new Vector3(0.1f, 0.1f, 0.1f);
     //-----------------------------------------------------------------------------------
     [Space, SerializeField]
@@ -48,7 +46,7 @@ public class ResultManager : MonoBehaviour
         enabled = true;
         _isCompleted = false;
 
-        SStage stageInfo = DataManager.Instance.SeletedStage;
+        SStage stageInfo = DataManager.Instance.SelectedStage;
         _stageTitle.text = $"{stageInfo.chapter}-{stageInfo.stage}";
 
         _goalProfitsText[0].text = stageInfo.goalProfits1.ToString();
@@ -127,7 +125,7 @@ public class ResultManager : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Space) && _isCompleted)
         {
-            DataManager.Instance.isSeletedStage = false;
+            DataManager.Instance.isSelectedStage = false;
             FadeManager.Instance.StartFadeOut(() => SceneManager.LoadScene("Lobby"));
             enabled = false;
         }

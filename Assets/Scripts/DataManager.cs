@@ -35,10 +35,12 @@ public class DataManager : MonoBehaviour
     }
     public SStage GetStage(int chapterValue, int stageValue)
     {
+        //  FlagCtrl에서 호출
         return _stages.Find(s => s.chapter == chapterValue && s.stage == stageValue); 
     }
     public SMenu[] GetMenus(int menusBit) 
     {
+        //  OrderManager에서 호출
         return _menus.FindAll(m => (m.bitId & menusBit) > 0).ToArray();
     }
     public SIngredient GetIngredient(int bitId)
@@ -46,8 +48,10 @@ public class DataManager : MonoBehaviour
         return _ingredients.Find(i => i.bitId == bitId);
     }
     //---------------------------------------------------------------------------
-    public bool isSeletedStage { get; set; }
-    public SStage SeletedStage { get; set; }
+    public bool isSelectedStage { get; set; }
+    public SStage SelectedStage { get; set; }
+
+    //게임 결과 값 저장 구조체
     public struct SResult
     {
         public int deliveredCount;
@@ -62,6 +66,7 @@ public class DataManager : MonoBehaviour
     //---------------------------------------------------------------------------
     public void SetResultInfo(int deliveredCount, int deliveredProfit, int failedCount, int failedProfit, int totalProfit)
     {
+        //InGameManager에서 호출
         ResultInfo.deliveredCount = deliveredCount;
         ResultInfo.deliveredProfit = deliveredProfit;
 

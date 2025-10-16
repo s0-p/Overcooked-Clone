@@ -22,8 +22,10 @@ public class CarCtrl : MonoBehaviour
     }
     void OnLoaded()
     {
-        FadeManager.Instance.StartFadeIn(() => enabled = true);
         enabled = false;
+
+        //  FadeIn 후 CarCtrl이 동작하도록 람다식 작성
+        FadeManager.Instance.StartFadeIn(() => enabled = true);
     }
     void FixedUpdate()
     {
@@ -41,17 +43,20 @@ public class CarCtrl : MonoBehaviour
     }
     void Update()
     {
+        //  스테이지 선택 처리
         if (Input.GetKeyDown(KeyCode.Space))
             _flag?.GetComponent<FlagCtrl>().LoadInGame();
     }
     //--------------------------------------------------------------------------
     void OnTriggerEnter(Collider other)
     {
+        //  현재 보고 있는 스테이지 플래그 임시 저장
         if (other.gameObject.layer == LayerMask.NameToLayer("Flag"))
             _flag = other.gameObject;
     }
     void OnTriggerExit(Collider other)
     {
+        //  임시 저장 해제
         if (other.gameObject.layer == LayerMask.NameToLayer("Flag"))
             _flag = null;
     }

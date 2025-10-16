@@ -39,6 +39,7 @@ public class FadeManager : MonoBehaviour
             _blackImageRectTrsf.localScale += Time.deltaTime * _fadeSpeed * _offset;
         }
         actionAfterFadeIn?.Invoke();
+        //FadeIn 후 화면 전환
     }
     public void StartFadeOut(Action actionAfterFadeOut)
     {
@@ -52,5 +53,6 @@ public class FadeManager : MonoBehaviour
             _blackImageRectTrsf.localScale -= Time.deltaTime * _fadeSpeed * _offset;
         }
         actionAfterFadeOut?.Invoke();
+        //FadeOut 후 화면 전환
     }
 }

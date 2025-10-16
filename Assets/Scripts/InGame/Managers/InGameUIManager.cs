@@ -22,6 +22,7 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField]
     GameObject _endText;
     Vector3 _messageOffset = new Vector3(0.1f, 0.1f, 0.1f);
+
     public void OnOffMessage(eMESSAGE type, bool isOn) 
     {
         GameObject message = null;
@@ -71,6 +72,7 @@ public class InGameUIManager : MonoBehaviour
     Color _midTimeColor;
     [SerializeField]
     Color _minTimeColor;
+
     public void SetLimitedTime(int limitedTime)
     {
         _timeSlider.maxValue = limitedTime;

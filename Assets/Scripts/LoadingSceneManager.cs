@@ -39,7 +39,7 @@ public class LoadingSceneManager : MonoBehaviour
     }
     void Start()
     {
-        if(DataManager.Instance.isSeletedStage)
+        if(DataManager.Instance.isSelectedStage)
         {
             _tipImage.gameObject.SetActive(false);
             _tipText.gameObject.SetActive(false);
@@ -47,7 +47,8 @@ public class LoadingSceneManager : MonoBehaviour
             _stageInfoBG.SetActive(true);
             _goalProfits.SetActive(true);
 
-            SStage currentStage = DataManager.Instance.SeletedStage;
+            //스테이지 정보 세팅
+            SStage currentStage = DataManager.Instance.SelectedStage;
             if (currentStage.id < DataManager.Instance.InGameImages.Length)
                 _inGameImage.sprite = DataManager.Instance.InGameImages[currentStage.id];
             _stageTitle.text = $"{currentStage.chapter}-{currentStage.stage}";
@@ -55,7 +56,11 @@ public class LoadingSceneManager : MonoBehaviour
             _goalProfitsText[0].text = currentStage.goalProfits1.ToString();
             _goalProfitsText[1].text = currentStage.goalProfits2.ToString();
             _goalProfitsText[2].text = currentStage.goalProfits3.ToString();
+
+            _loadingSlider.value = 0;
+            FadeManager.Instance.StartFadeIn(Loading);
         }
+
         //  선택된 스테이지가 없는 경우
         else
         {
@@ -68,13 +73,10 @@ public class LoadingSceneManager : MonoBehaviour
             //_tipImage.sprite = 
             //_tipText.text = 
         }
-        _loadingSlider.value = 0;
-
-        FadeManager.Instance.StartFadeIn(Loading);
     }
     public void Loading()
     {
-        if (DataManager.Instance.isSeletedStage)
+        if (DataManager.Instance.isSelectedStage)
             StartCoroutine(CRT_Loading(_stageTitle.text));
         else
             StartCoroutine(CRT_Loading("Lobby"));

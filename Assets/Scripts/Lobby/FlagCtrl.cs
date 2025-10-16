@@ -24,6 +24,7 @@ public class FlagCtrl : MonoBehaviour
     //----------------------------------------------------------------------------------
     void Start()
     {
+        //  플래그에 해당되는 스테이지 데이터 로딩
         _stageInfo = DataManager.Instance.GetStage(_chapter, _stage);
 
         _title.text = $"{_chapter}-{_stage}";
@@ -39,6 +40,7 @@ public class FlagCtrl : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
+        //  스테이지 정보 창 활성화
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             _infoWindow.SetActive(true);
@@ -46,6 +48,7 @@ public class FlagCtrl : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
+        //  스테이지 정보 창 비활성화
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             _infoWindow.SetActive(false);
@@ -53,9 +56,11 @@ public class FlagCtrl : MonoBehaviour
     }
     public void LoadInGame() 
     {
-        DataManager.Instance.isSeletedStage = true;
-        DataManager.Instance.SeletedStage = _stageInfo;
+        //  데이터 매니저에게 정보 전달
+        DataManager.Instance.isSelectedStage = true;
+        DataManager.Instance.SelectedStage = _stageInfo;
 
+        //  FadeOut 후 스테이지 씬 로딩
         FadeManager.Instance.StartFadeOut(() => SceneManager.LoadScene("Loading"));
     }
 }

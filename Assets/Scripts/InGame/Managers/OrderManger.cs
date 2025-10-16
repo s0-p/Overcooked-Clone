@@ -34,7 +34,7 @@ public class OrderManger : MonoBehaviour
 
         _orderStartPosX = Screen.width;
 
-        _currentStageMenus = DataManager.Instance.GetMenus(DataManager.Instance.SeletedStage.menusBit);
+        _currentStageMenus = DataManager.Instance.GetMenus(DataManager.Instance.SelectedStage.menusBit);
         _orderPool.Init(_maxCount, _orderPrefab);
     }
     //----------------------------------------------------------------------------------
